@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Task 수집 인스트럭션</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #eef2ff;
+  --primary-glow: rgba(99,102,241,.15);
+  --success: #10b981;
+  --success-light: #ecfdf5;
+  --danger: #ef4444;
+  --danger-light: #fef2f2;
+  --warn: #f59e0b;
+  --warn-light: #fffbeb;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-500: #64748b;
+  --gray-700: #334155;
+  --gray-900: #0f172a;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+* { box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+  background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fef2f8 100%);
+  background-attachment: fixed;
+  color: var(--gray-900);
+  line-height: 1.7;
+  margin: 0;
+  min-height: 100vh;
+}
+.wrap { max-width: 780px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+
+/* ── Progress Bar ── */
+.progress-wrap {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  padding: .85rem 0 .6rem;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.progress-steps {
+  display: flex; justify-content: center; align-items: center; gap: .4rem;
+}
+.step-dot {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: .85rem;
+  background: var(--gray-200); color: var(--gray-500);
+  transition: all .35s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.step-dot.active {
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  color: #fff;
+  box-shadow: 0 4px 14px var(--primary-glow);
+  transform: scale(1.1);
+}
+.step-dot.done {
+  background: linear-gradient(135deg, var(--success), #34d399);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(16,185,129,.25);
+}
+.step-line { width: 40px; height: 3px; background: var(--gray-200); border-radius: 2px; transition: .4s; }
+.step-line.done { background: linear-gradient(90deg, var(--success), #34d399); }
+.step-label { font-size: .7rem; text-align: center; color: var(--gray-500); margin-top: .25rem; font-weight: 500; }
+
+/* ── Cards ── */
+.card {
+  background: rgba(255,255,255,.8);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: var(--radius);
+  padding: 1.5rem; margin: 1.25rem 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.03);
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.07); }
+.card-accent {
+  border-left: 4px solid var(--primary);
+  background: linear-gradient(135deg, rgba(238,242,255,.6), rgba(255,255,255,.8));
+}
+
+/* ── Criteria Boxes ── */
+.criteria-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1.25rem 0; }
+.criteria-item {
+  background: rgba(255,255,255,.9);
+  border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+  padding: 1.25rem; transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+.criteria-item:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--primary-glow);
+}
+.criteria-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  color: #fff; font-weight: 700; font-size: .85rem;
+  margin-right: .6rem;
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+.criteria-title { font-weight: 700; font-size: 1.08rem; display: inline; }
+
+/* ── Example Boxes ── */
+.ex-good {
+  background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+  border: 1.5px solid #86efac;
+  border-radius: var(--radius-sm); padding: .85rem 1rem; margin: .75rem 0;
+  font-size: .9rem; font-style: italic; line-height: 1.65;
+}
+.ex-good b, .ex-bad b { font-style: normal; }
+.ex-bad {
+  background: linear-gradient(135deg, #fef2f2, #fff1f2);
+  border: 1.5px solid #fca5a5;
+  border-radius: var(--radius-sm); padding: .85rem 1rem; margin: .75rem 0;
+  font-size: .9rem; font-style: italic; line-height: 1.65;
+}
+.ex-reason { font-size: .82rem; color: var(--gray-700); margin-top: .3rem; line-height: 1.5; font-style: normal; }
+
+/* ── Tip / Warn Boxes ── */
+.tip-box {
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: .95rem;
+  box-shadow: 0 2px 8px rgba(99,102,241,.08);
+}
+.warn-box {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border-left: 4px solid var(--warn);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: .95rem;
+  box-shadow: 0 2px 8px rgba(245,158,11,.08);
+}
+.lang-box {
+  background: linear-gradient(135deg, #e0e7ff, #ede9fe);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: .95rem;
+  box-shadow: 0 2px 8px rgba(124,58,237,.08);
+}
+
+/* ── Buttons ── */
+.btn {
+  padding: .65rem 1.6rem; border: none; border-radius: 999px;
+  font-weight: 700; font-size: .95rem; cursor: pointer;
+  transition: all .25s cubic-bezier(.4,0,.2,1);
+  display: inline-flex; align-items: center; gap: .4rem;
+  letter-spacing: -.01em;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  color: #fff;
+  box-shadow: 0 4px 14px var(--primary-glow);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99,102,241,.3); }
+.btn-secondary {
+  background: rgba(255,255,255,.8); color: var(--gray-700);
+  border: 1.5px solid var(--gray-200);
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.btn-secondary:hover { background: #fff; border-color: var(--gray-300); transform: translateY(-1px); }
+.btn-success {
+  background: linear-gradient(135deg, var(--success), #34d399);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(16,185,129,.2);
+}
+.btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,.3); }
+.btn:disabled { background: var(--gray-200); color: var(--gray-500); cursor: not-allowed; box-shadow: none; transform: none; }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn-nav { display: flex; justify-content: space-between; margin-top: 2rem; }
+
+/* ── Task Form ── */
+.task-input {
+  width: 100%; padding: .75rem .9rem;
+  border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm);
+  font: inherit; font-size: .95rem; resize: vertical;
+  background: rgba(255,255,255,.7);
+  transition: all .2s ease;
+}
+.task-input:focus {
+  outline: none; border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+  background: #fff;
+}
+.char-count { font-size: .75rem; color: var(--gray-500); text-align: right; margin-top: .25rem; }
+.checklist-item {
+  display: flex; align-items: flex-start; gap: .5rem; padding: .45rem 0;
+}
+.checklist-item input[type="checkbox"] {
+  width: 20px; height: 20px; margin-top: 2px; cursor: pointer;
+  accent-color: var(--primary); border-radius: 4px;
+}
+.checklist-item label { cursor: pointer; line-height: 1.5; font-size: .92rem; }
+.task-num-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  color: #fff; width: 32px; height: 32px;
+  border-radius: 50%; font-weight: 700; font-size: .9rem; margin-right: .5rem;
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+.url-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  color: var(--primary-dark);
+  padding: .25rem .8rem; border-radius: 999px; font-weight: 600; font-size: .88rem;
+  border: 1px solid rgba(99,102,241,.15);
+}
+
+/* ── Pages ── */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn .5s cubic-bezier(.4,0,.2,1); }
+@keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+.section-divider {
+  height: 1px; margin: 2.5rem 0;
+  background: linear-gradient(to right, transparent, var(--gray-300), transparent);
+}
+
+/* ── Headings ── */
+h1 { letter-spacing: -.03em; }
+h2 { letter-spacing: -.02em; }
+h3 { letter-spacing: -.01em; }
+
+@media (max-width: 600px) {
+  .criteria-grid { grid-template-columns: 1fr; }
+  .btn-nav { flex-direction: column; gap: .5rem; }
+  .wrap { padding: 0 .75rem 3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ PROGRESS BAR ══ -->
+<div class="progress-wrap">
+<div class="wrap">
+  <div class="progress-steps">
+    <div><div class="step-dot active" id="sd1">1</div><div class="step-label">소개</div></div>
+    <div class="step-line" id="sl1"></div>
+    <div><div class="step-dot" id="sd2">2</div><div class="step-label">기준+예시</div></div>
+    <div class="step-line" id="sl2"></div>
+    <div><div class="step-dot" id="sd3">3</div><div class="step-label">작성</div></div>
+    <div class="step-line" id="sl3"></div>
+    <div><div class="step-dot" id="sd4">4</div><div class="step-label">완료</div></div>
+  </div>
+</div>
+</div>
+
+<div class="wrap">
+
+<!-- ════════════════════════════════════════
+     PAGE 1: 소개
+     ════════════════════════════════════════ -->
+<div class="page active" id="page1">
+  <h1 style="font-size:2rem; margin-top:2rem; font-weight:800; background:linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Computer Use Agent를 위한<br>Task 수집 작업</h1>
+
+  <div class="card card-accent">
+    <h3 style="margin-top:0;">이 작업에서 여러분이 할 일</h3>
+    <p>여러분에게 <b>하나의 웹사이트 URL</b>이 주어집니다.<br>
+    그 웹사이트에서 <b>실제 사용자가 할 법한 작업(Task)</b>을 <b>영어 문장으로</b> 작성합니다.</p>
+    <p style="margin-bottom:0;">작성한 Task는 나중에 AI 에이전트의 학습데이터로 사용됩니다.<br>
+    따라서 <b>AI가 추가 정보 없이 명확하게 이해하고 수행할 수 있는 영어 문장</b>이어야 합니다.</p>
+  </div>
+
+  <div class="tip-box">
+    <b>Task란?</b><br>
+    "어떤 웹사이트에서 달성하고 싶은 <b>하나의 구체적인 목표</b>"를 자연어로 서술한 것입니다.<br>
+    예: <i>"Book the cheapest hotel in Paris for 2 adults from March 20 to 23, 2026 on booking.com."</i>
+  </div>
+
+  <div class="lang-box">
+    <b>Task는 반드시 영어(English)로 작성하세요!</b><br>
+    여러분이 작성하는 <b>Task 문장은 반드시 영어</b>여야 합니다.<br>
+  </div>
+
+  <div class="warn-box">
+    <b>주의사항</b><br>
+    ・개인정보(실제 이름, 전화번호, 주소 등)는 절대 입력하지 마세요.<br>
+    ・윤리에 위배되는 Task는 절대 작성하지 마세요.
+  </div>
+
+  <div class="btn-nav">
+    <div></div>
+    <button class="btn btn-primary" onclick="goPage(2)">다음: 기준 & 예시 &rarr;</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PAGE 2: 기준 + 예시
+     ════════════════════════════════════════ -->
+<div class="page" id="page2">
+  <h2 style="margin-top:2rem;">고품질 Task의 4가지 기준</h2>
+
+  <div class="card card-accent" style="margin-bottom:1.25rem;">
+    <b style="font-size:1.05rem;">고품질 Task란?</b><br>
+    사용자가 실제 컴퓨터 환경에서 수행할 법하며, <b>구체적인 목표</b>와 <b>명확한 성공 기준</b>을 포함한 Task
+  </div>
+
+  <p>아래 4가지 기준을 <b>모두 만족</b>해야 고품질 Task입니다.</p>
+
+  <div class="criteria-grid">
+    <!-- 기준 1: 실용성 -->
+    <div class="criteria-item">
+      <div><span class="criteria-num">1</span><span class="criteria-title">실용성</span></div>
+      <p style="margin:.5rem 0 0; font-size:.9rem;">
+        사용자가 <b>실제 컴퓨터 사용 과정에서 경험한</b>, 인위적이지 않고 <b>유용한</b> Task
+      </p>
+      <div class="ex-good">
+        <b>O</b> "Book the cheapest round-trip economy flight from Los Angeles to New York for 1 adult, departing March 20, 2026 and returning March 23, 2026 on united.com."
+      </div>
+      <div class="ex-bad">
+        <b>X</b> "Click 10 buttons in order on YouTube."<br>
+        <span class="ex-reason">&rarr; 실제 사용자가 할 법한 목적이 없음</span>
+      </div>
+    </div>
+
+    <!-- 기준 2: 구체성 -->
+    <div class="criteria-item">
+      <div><span class="criteria-num">2</span><span class="criteria-title">구체성</span></div>
+      <p style="margin:.5rem 0 0; font-size:.9rem;">
+        <b>추가 정보 없이도</b> 수행 가능하고, <b>구체적인 목표</b>가 충분히 제시된 Task
+      </p>
+      <div class="ex-good">
+        <b>O</b> "On apple.com, compare the price and storage options of the iPhone 17 Pro, and check trade-in value for an iPhone 15."
+      </div>
+      <div class="ex-bad">
+        <b>X</b> "Purchase a memory storage device."<br>
+        <span class="ex-reason">&rarr; 어떤 사이트에서? 어떤 제품을? 정보가 부족</span>
+      </div>
+    </div>
+
+    <!-- 기준 3: 객관성 -->
+    <div class="criteria-item">
+      <div><span class="criteria-num">3</span><span class="criteria-title">객관성</span></div>
+      <p style="margin:.5rem 0 0; font-size:.9rem;">
+        완료 조건이 <b>객관적</b>으로 제시되어, 성공 여부를 <b>누구나 동일하게</b> 판단할 수 있는 Task
+      </p>
+      <div class="ex-good">
+        <b>O</b> "Compare the prices and customer ratings of the Rhino USA Folding Survival Shovel and the iunio 17-inch Folding Survival Shovel on amazon.com."
+      </div>
+      <div class="ex-bad">
+        <b>X</b> "Recommend me a good mascara."<br>
+        <span class="ex-reason">&rarr; "good"의 기준이 사람마다 다름. 사이트도 없음</span>
+      </div>
+    </div>
+
+    <!-- 기준 4: 고수준 목표 지향성 -->
+    <div class="criteria-item">
+      <div><span class="criteria-num">4</span><span class="criteria-title">고수준 목표 지향성</span></div>
+      <p style="margin:.5rem 0 0; font-size:.9rem;">
+        <b>절차적 지시(클릭&rarr;입력&rarr;클릭)</b>가 아닌, <b>최종 목표</b> 중심으로 서술된 Task
+      </p>
+      <div class="ex-good">
+        <b>O</b> "Book a vacation rental in Nice, France for 2 guests, checking in March 20, 2026 and checking out March 23, 2026 on airbnb.com."
+      </div>
+      <div class="ex-bad">
+        <b>X</b> "Select the check-in date, then select the check-out date, then click the search button, then..."<br>
+        <span class="ex-reason">&rarr; 단계별 절차가 아닌, 달성하려는 목표를 쓰세요</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>웹사이트별 참고 예시</h3>
+  <p style="font-size:.9rem; color:var(--gray-500);">아래는 영감을 얻기 위한 참고용입니다. 그대로 복사하지 마세요.</p>
+
+  <div class="card" style="padding:1rem;">
+    <div><span class="url-badge">booking.com</span> <span style="color:var(--gray-500); font-size:.85rem;">Travel &amp; Tourism</span></div>
+    <ul style="margin-top:.5rem; font-size:.9rem;">
+      <li>"Book the highest-rated hotel under $200 per night in Paris for 2 adults from June 10 to 14, 2026 on booking.com."</li>
+      <li>"Reserve a pet-friendly apartment in central Rome for 1 adult, checking in April 5 and out April 8, 2026, rated 9.0 or above on booking.com."</li>
+    </ul>
+  </div>
+  <div class="card" style="padding:1rem;">
+    <div><span class="url-badge">ebay.com</span> <span style="color:var(--gray-500); font-size:.85rem;">E-commerce &amp; Shopping</span></div>
+    <ul style="margin-top:.5rem; font-size:.9rem;">
+      <li>"Purchase the cheapest new Sony WH-1000XM5 headphone available on eBay."</li>
+      <li>"Buy a Beatles 'Abbey Road' vinyl record in Near Mint condition under $50 on eBay."</li>
+    </ul>
+  </div>
+  <div class="card" style="padding:1rem;">
+    <div><span class="url-badge">espn.com</span> <span style="color:var(--gray-500); font-size:.85rem;">Sports</span></div>
+    <ul style="margin-top:.5rem; font-size:.9rem;">
+      <li>"Add the top 3 Eastern Conference teams in the 2025-26 NBA season to your favorites on ESPN."</li>
+      <li>"Set up score alerts for the Manchester United vs. Arsenal Premier League match on April 20, 2026 on ESPN."</li>
+    </ul>
+  </div>
+  <div class="card" style="padding:1rem;">
+    <div><span class="url-badge">youtube.com</span> <span style="color:var(--gray-500); font-size:.85rem;">Arts &amp; Entertainment</span></div>
+    <ul style="margin-top:.5rem; font-size:.9rem;">
+      <li>"Subscribe to the channel that uploaded the most-viewed 'MacBook Neo review' video on YouTube."</li>
+      <li>"Create a playlist called 'Keyboard Reviews' on YouTube with the top 3 results for 'best budget mechanical keyboard 2026'."</li>
+    </ul>
+  </div>
+  <div class="card" style="padding:1rem;">
+    <div><span class="url-badge">coingecko.com</span> <span style="color:var(--gray-500); font-size:.85rem;">Crypto &amp; Blockchain</span></div>
+    <ul style="margin-top:.5rem; font-size:.9rem;">
+      <li>"Add Bitcoin and Ethereum to your portfolio on CoinGecko with purchase prices of $60,000 and $3,000, and set an alert for when Bitcoin drops below $55,000."</li>
+      <li>"Create a watchlist named 'DeFi Picks' on CoinGecko with the top 5 DeFi tokens by market cap that gained over 10% in the last 7 days."</li>
+    </ul>
+  </div>
+
+  <div class="warn-box">
+    <b>예시를 그대로 복사하면 안 됩니다!</b><br>
+    직접 해당 웹사이트를 방문해보고, <b>본인이 실제로 경험했던 작업</b>을 떠올려 영어로 작성하세요.
+  </div>
+
+  <div class="btn-nav">
+    <button class="btn btn-secondary" onclick="goPage(1)">&larr; 이전</button>
+    <button class="btn btn-primary" onclick="goPage(3)">다음: Task 작성 &rarr;</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PAGE 3: Task 작성
+     ════════════════════════════════════════ -->
+<div class="page" id="page3">
+  <h2 style="margin-top:2rem;">Task 작성</h2>
+
+  <!-- URL 랜덤 배정 -->
+  <div class="card" style="text-align:center; padding:1.25rem;">
+    <div style="font-size:.85rem; color:var(--gray-500); margin-bottom:.5rem;">배정된 웹사이트</div>
+    <div style="font-size:1.6rem; font-weight:700; margin:.5rem 0;">
+      <a id="assigned-url-link" href="#" target="_blank" style="color:var(--primary); text-decoration:none; border-bottom:2px dashed var(--primary);">loading...</a>
+    </div>
+    <div id="url-category" style="font-size:.85rem; color:var(--gray-500); margin-top:.3rem;"></div>
+    <div style="margin-top:.75rem;">
+      <button class="btn btn-secondary" onclick="randomizeUrl()" style="font-size:.85rem; padding:.4rem 1rem;">다른 웹사이트 배정받기</button>
+    </div>
+    <div style="font-size:.85rem; color:var(--gray-500); margin-top:.5rem;">
+      작성 전, 위 링크를 클릭하여 웹사이트를 직접 방문해보세요.
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <b>작성 팁</b> &nbsp;<span style="background:#4f46e5; color:#fff; font-size:.75rem; padding:.1rem .5rem; border-radius:999px; font-weight:700;">English</span><br>
+    &middot; Task는 <b>영어</b>로 작성하세요<br>
+    &middot; 먼저 웹사이트를 <b>자유롭게 탐색</b>하세요 (2~3분)<br>
+    &middot; "내가 이 사이트를 <b>실제로 사용했던 경험</b>"을 떠올리며 Task를 작성하세요<br>
+    &middot; <b>서로 다른 기능</b>을 활용하는 Task를 작성하세요 (예약, 구매, 구독, 비교 등)<br>
+    &middot; 이름, 날짜, 숫자 등의 정보는 <b>명시적으로</b> 작성하세요
+  </div>
+
+  <!-- Task 1 (필수) -->
+  <div class="card" id="task-block-1">
+    <div style="display:flex; align-items:center; margin-bottom:.75rem;">
+      <span class="task-num-badge">1</span>
+      <span style="font-weight:700; font-size:1.05rem;">Task 1</span>
+      <span style="font-size:.75rem; color:var(--danger); margin-left:.5rem; font-weight:600;">필수</span>
+    </div>
+    <textarea class="task-input" id="task1" rows="3" placeholder="Write your task in English." oninput="updateCount(1)"></textarea>
+    <div class="char-count" id="count1">0 characters</div>
+    <div style="margin-top:.6rem; font-size:.88rem; color:var(--gray-700);"><b>자가 점검</b></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-1"><label for="c1-1">실용성 &mdash; 직접 경험해본 적 있는 작업인가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-2"><label for="c1-2">구체성 &mdash; 추가 정보 없이 수행 가능한가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-3"><label for="c1-3">객관성 &mdash; 완료 여부를 누구나 판단할 수 있는가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-4"><label for="c1-4">고수준 목표 &mdash; 절차 나열이 아닌 목표 중심인가?</label></div>
+  </div>
+
+  <!-- 추가 Task들이 여기에 삽입됨 -->
+  <div id="task-container"></div>
+
+  <!-- + Task 추가 버튼 -->
+  <div style="text-align:center; margin:1rem 0;">
+    <button class="btn btn-secondary" onclick="addTask()" id="add-task-btn" style="font-size:.9rem;">+ Task 추가</button>
+  </div>
+
+  <div class="warn-box">
+    <b>제출 전 확인</b><br>
+    &middot;  Task를 <b>영어</b>로 작성했나요?<br>
+    &middot;  개인정보가 포함되어 있지 않나요?
+  </div>
+
+  <div id="submit-error" style="display:none; color:var(--danger); font-weight:600; margin-top:1rem; text-align:center;"></div>
+
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2rem; flex-wrap:wrap; gap:.75rem;">
+    <button class="btn btn-secondary" onclick="goPage(2)">&larr; 이전</button>
+    <div style="display:flex; gap:.75rem;">
+      <button class="btn btn-success" onclick="submitAndNewUrl()">제출 &amp; 다른 웹사이트</button>
+      <button class="btn btn-primary" onclick="submitAndFinish()">제출 &amp; 끝내기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PAGE 4: 완료
+     ════════════════════════════════════════ -->
+<div class="page" id="page4">
+  <div style="text-align:center; margin-top:4rem;">
+    <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, var(--success), #34d399); color:#fff; font-size:2.2rem; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem; box-shadow:0 8px 25px rgba(16,185,129,.25);">&#10003;</div>
+    <h2 style="margin-top:.5rem;">수고하셨습니다!</h2>
+    <p style="color:var(--gray-500); font-size:1.05rem;">모든 Task 작성이 완료되었습니다.</p>
+    <div class="card" style="text-align:left; max-width:600px; margin:2rem auto;" id="all-submissions"></div>
+    <!-- 피드백 (선택사항) -->
+    <div class="card" style="text-align:left; max-width:600px; margin:1rem auto; background:var(--gray-50);">
+      <label style="font-weight:600;">피드백 (선택사항)</label>
+      <textarea class="task-input" id="feedback" rows="2" placeholder="작업 중 어려웠던 점, 개선 제안 등 자유롭게 적어주세요." style="margin-top:.5rem;"></textarea>
+    </div>
+  </div>
+</div>
+
+
+</div><!-- .wrap -->
+
+<!-- ══ SCRIPTS ══ -->
+<script>
+const URLS = [
+  {url: "usps.com", category: "Business & Consumer Services"},
+  {url: "zillow.com", category: "Business & Consumer Services"},
+  {url: "truist.com", category: "Community & Society"},
+  {url: "linkedin.com", category: "Computers, Electronics & Technology"},
+  {url: "reddit.com", category: "Computers, Electronics & Technology"},
+  {url: "aliexpress.com", category: "E-commerce & Shopping"},
+  {url: "amazon.com", category: "E-commerce & Shopping"},
+  {url: "ebay.com", category: "E-commerce & Shopping"},
+  {url: "mcmaster.com", category: "Heavy Industry & Engineering"},
+  {url: "istockphoto.com", category: "Hobbies & Leisure"},
+  {url: "pexels.com", category: "Hobbies & Leisure"},
+  {url: "pixabay.com", category: "Hobbies & Leisure"},
+  {url: "unsplash.com", category: "Hobbies & Leisure"},
+  {url: "naukri.com", category: "Jobs & Career"},
+  {url: "myntra.com", category: "Lifestyle"},
+  {url: "nike.com", category: "Lifestyle"},
+  {url: "shein.com", category: "Lifestyle"},
+  {url: "uniqlo.com", category: "Lifestyle"},
+  {url: "merriam-webster.com", category: "Reference Materials"},
+  {url: "wikimedia.org", category: "Reference Materials"},
+  {url: "wikipedia.org", category: "Reference Materials"},
+  {url: "yelp.com", category: "Reference Materials"},
+  {url: "blackboard.com", category: "Science & Education"},
+  {url: "instructure.com", category: "Science & Education"},
+  {url: "scribd.com", category: "Science & Education"},
+  {url: "udemy.com", category: "Science & Education"},
+  {url: "weather.com", category: "Science & Education"},
+  {url: "agoda.com", category: "Travel & Tourism"},
+  {url: "airbnb.com", category: "Travel & Tourism"},
+  {url: "booking.com", category: "Travel & Tourism"},
+  {url: "marriott.com", category: "Travel & Tourism"},
+  {url: "trip.com", category: "Travel & Tourism"},
+  {url: "united.com", category: "Travel & Tourism"},
+  {url: "tesla.com", category: "Vehicles"},
+  {url: "hgtv.com", category: "Home & Garden"},
+  {url: "ikea.com", category: "Home & Garden"},
+  {url: "aarp.org", category: "Health"},
+  {url: "clevelandclinic.org", category: "Health"},
+  {url: "mayoclinic.org", category: "Health"},
+  {url: "nih.gov", category: "Health"},
+  {url: "crazygames.com", category: "Games"},
+  {url: "nexusmods.com", category: "Games"},
+  {url: "poki.com", category: "Games"},
+  {url: "steamcommunity.com", category: "Games"},
+  {url: "steampowered.com", category: "Games"},
+  {url: "twitch.tv", category: "Games"},
+  {url: "bbc.co.uk", category: "News & Media"},
+  {url: "globo.com", category: "News & Media"},
+  {url: "news.google.com", category: "News & Media"},
+  {url: "nytimes.com", category: "News & Media"},
+  {url: "yahoo.com", category: "News & Media"},
+  {url: "cricbuzz.com", category: "Sports"},
+  {url: "espn.com", category: "Sports"},
+  {url: "espncricinfo.com", category: "Sports"},
+  {url: "sofascore.com", category: "Sports"},
+  {url: "sports.yahoo.com", category: "Sports"},
+  {url: "coingecko.com", category: "Crypto & Blockchain"},
+  {url: "coinglass.com", category: "Crypto & Blockchain"},
+  {url: "coinmarketcap.com", category: "Crypto & Blockchain"},
+  {url: "hibt.com", category: "Crypto & Blockchain"},
+  {url: "phemex.com", category: "Crypto & Blockchain"},
+  {url: "petsmart.com", category: "Pets & Animals"},
+  {url: "fandom.com", category: "Arts & Entertainment"},
+  {url: "imdb.com", category: "Arts & Entertainment"},
+  {url: "spotify.com", category: "Arts & Entertainment"},
+  {url: "youtube.com", category: "Arts & Entertainment"},
+  {url: "chase.com", category: "Finance"},
+  {url: "citi.com", category: "Finance"},
+  {url: "investing.com", category: "Finance"},
+  {url: "allrecipes.com", category: "Food & Dining"},
+  {url: "instacart.com", category: "Food & Dining"},
+  {url: "opentable.com", category: "Food & Dining"},
+  {url: "ubereats.com", category: "Food & Dining"}
+];
+
+let currentUrl = null;
+let nextTaskId = 2; // Task 1은 HTML에 고정, 추가는 2부터
+let allSubmissions = [];
+
+function randomizeUrl() {
+  const idx = Math.floor(Math.random() * URLS.length);
+  currentUrl = URLS[idx];
+  document.getElementById('assigned-url-link').textContent = currentUrl.url;
+  document.getElementById('assigned-url-link').href = 'https://' + currentUrl.url;
+  document.getElementById('url-category').textContent = 'Category: ' + currentUrl.category;
+}
+
+function addTask() {
+  var n = nextTaskId++;
+  var html = '<div class="card" id="task-block-' + n + '">' +
+    '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:.75rem;">' +
+      '<div style="display:flex; align-items:center;">' +
+        '<span class="task-num-badge">' + n + '</span>' +
+        '<span style="font-weight:700; font-size:1.05rem;">Task ' + n + '</span>' +
+      '</div>' +
+      '<button class="btn btn-secondary" onclick="removeTask(' + n + ')" style="font-size:.75rem; padding:.25rem .7rem; color:var(--danger);">삭제</button>' +
+    '</div>' +
+    '<textarea class="task-input" id="task' + n + '" rows="3" placeholder="Write your task in English." oninput="updateCount(' + n + ')"></textarea>' +
+    '<div class="char-count" id="count' + n + '">0 characters</div>' +
+    '<div style="margin-top:.6rem; font-size:.88rem; color:var(--gray-700);"><b>자가 점검</b></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-1"><label for="c' + n + '-1">실용성 — 직접 경험해본 적 있는 작업인가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-2"><label for="c' + n + '-2">구체성 — 추가 정보 없이 수행 가능한가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-3"><label for="c' + n + '-3">객관성 — 완료 여부를 누구나 판단할 수 있는가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-4"><label for="c' + n + '-4">고수준 목표 — 절차 나열이 아닌 목표 중심인가?</label></div>' +
+  '</div>';
+  document.getElementById('task-container').insertAdjacentHTML('beforeend', html);
+}
+
+function removeTask(n) {
+  var el = document.getElementById('task-block-' + n);
+  if (el) el.remove();
+}
+
+function updateCount(n) {
+  var ta = document.getElementById('task' + n);
+  var ct = document.getElementById('count' + n);
+  if (ta && ct) ct.textContent = ta.value.length + ' characters';
+}
+
+// 모든 task 블록에서 데이터 수집
+function collectTasks() {
+  var blocks = document.querySelectorAll('[id^="task-block-"]');
+  var tasks = [];
+  for (var i = 0; i < blocks.length; i++) {
+    var block = blocks[i];
+    var num = block.id.replace('task-block-', '');
+    var ta = document.getElementById('task' + num);
+    var text = ta ? ta.value.trim() : '';
+    tasks.push({ num: num, text: text });
+  }
+  return tasks;
+}
+
+// 검증 공통
+function validateTasks() {
+  var errEl = document.getElementById('submit-error');
+  errEl.style.display = 'none';
+
+  if (!currentUrl) {
+    errEl.style.display = 'block';
+    errEl.textContent = '웹사이트가 배정되지 않았습니다.';
+    return null;
+  }
+
+  var tasks = collectTasks();
+  for (var i = 0; i < tasks.length; i++) {
+    var t = tasks[i];
+    if (t.text.length < 15) {
+      errEl.style.display = 'block';
+      errEl.textContent = 'Task ' + t.num + '이(가) 너무 짧습니다 (최소 15자).';
+      return null;
+    }
+    for (var c = 1; c <= 4; c++) {
+      var cb = document.getElementById('c' + t.num + '-' + c);
+      if (cb && !cb.checked) {
+        errEl.style.display = 'block';
+        errEl.textContent = 'Task ' + t.num + '의 자가 점검을 모두 체크해주세요.';
+        return null;
+      }
+    }
+  }
+  return tasks;
+}
+
+function saveSubmission(tasks) {
+  var submission = { url: currentUrl.url, category: currentUrl.category, tasks: tasks.map(function(t) { return t.text; }) };
+  allSubmissions.push(submission);
+  return submission;
+}
+
+function resetPage3() {
+  document.getElementById('task-container').innerHTML = '';
+  document.getElementById('task1').value = '';
+  document.getElementById('count1').textContent = '0 characters';
+  for (var c = 1; c <= 4; c++) { document.getElementById('c1-' + c).checked = false; }
+  nextTaskId = 2;
+  document.getElementById('submit-error').style.display = 'none';
+  randomizeUrl();
+}
+
+// 제출 & 다른 웹사이트
+function submitAndNewUrl() {
+  var tasks = validateTasks();
+  if (!tasks) return;
+  saveSubmission(tasks);
+  resetPage3();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// 제출 & 끝내기
+function submitAndFinish() {
+  var tasks = validateTasks();
+  if (!tasks) return;
+  saveSubmission(tasks);
+  showFinalSummary();
+  downloadJSON();
+  goPage(4);
+}
+
+function showFinalSummary() {
+  var totalTasks = allSubmissions.reduce(function(a, s) { return a + s.tasks.length; }, 0);
+  var html = '<h4 style="margin-top:0;">전체 제출 내역</h4>';
+  allSubmissions.forEach(function(s, idx) {
+    html += '<div style="margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid var(--gray-200);">';
+    html += '<p style="margin:0;"><b>' + (idx+1) + '. ' + s.url + '</b> <span style="color:var(--gray-500); font-size:.8rem;">(' + s.category + ')</span></p>';
+    s.tasks.forEach(function(t, i) { html += '<p style="margin:.2rem 0 .2rem 1rem; font-size:.9rem;">' + (i+1) + '. ' + t + '</p>'; });
+    html += '</div>';
+  });
+  html += '<p style="font-weight:700;">총 ' + totalTasks + '개 Task / ' + allSubmissions.length + '개 웹사이트</p>';
+  document.getElementById('all-submissions').innerHTML = html;
+}
+
+function downloadJSON() {
+  var now = new Date();
+  var timestamp = now.getFullYear() + '-' +
+    String(now.getMonth()+1).padStart(2,'0') + '-' +
+    String(now.getDate()).padStart(2,'0') + '_' +
+    String(now.getHours()).padStart(2,'0') +
+    String(now.getMinutes()).padStart(2,'0');
+
+  var feedback = document.getElementById('feedback').value.trim();
+
+  var output = {
+    submitted_at: now.toISOString(),
+    total_websites: allSubmissions.length,
+    total_tasks: allSubmissions.reduce(function(a, s) { return a + s.tasks.length; }, 0),
+    feedback: feedback || null,
+    submissions: allSubmissions
+  };
+
+  var blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'tasks_' + timestamp + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  randomizeUrl();
+});
+
+var TOTAL_PAGES = 4;
+var currentPage = 1;
+
+function goPage(n) {
+  document.getElementById('page' + currentPage).classList.remove('active');
+  document.getElementById('page' + n).classList.add('active');
+  currentPage = n;
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+  for (var i = 1; i <= TOTAL_PAGES; i++) {
+    var dot = document.getElementById('sd' + i);
+    if (!dot) continue;
+    dot.className = 'step-dot';
+    if (i < currentPage) dot.classList.add('done');
+    else if (i === currentPage) dot.classList.add('active');
+    if (i < TOTAL_PAGES) {
+      var line = document.getElementById('sl' + i);
+      if (line) { line.className = 'step-line'; if (i < currentPage) line.classList.add('done'); }
+    }
+  }
+}
+</script>
+
+</body>
+</html>
