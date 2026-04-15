@@ -7,10 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --primary-light: #eef2ff;
-  --primary-glow: rgba(99,102,241,.15);
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #eff6ff;
+  --primary-glow: rgba(37,99,235,.12);
   --success: #10b981;
   --success-light: #ecfdf5;
   --danger: #ef4444;
@@ -31,7 +31,7 @@
 html { font-size: 16px; scroll-behavior: smooth; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
-  background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fef2f8 100%);
+  background: #f8fafc;
   background-attachment: fixed;
   color: var(--gray-900);
   line-height: 1.7;
@@ -60,13 +60,13 @@ body {
   box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
 .step-dot.active {
-  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  background: linear-gradient(135deg, var(--primary), #3b82f6);
   color: #fff;
   box-shadow: 0 4px 14px var(--primary-glow);
   transform: scale(1.1);
 }
 .step-dot.done {
-  background: linear-gradient(135deg, var(--success), #34d399);
+  background: linear-gradient(135deg, #10b981, #34d399);
   color: #fff;
   box-shadow: 0 2px 8px rgba(16,185,129,.25);
 }
@@ -87,7 +87,7 @@ body {
 .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.07); }
 .card-accent {
   border-left: 4px solid var(--primary);
-  background: linear-gradient(135deg, rgba(238,242,255,.6), rgba(255,255,255,.8));
+  background: linear-gradient(135deg, rgba(239,246,255,.6), rgba(255,255,255,.8));
 }
 
 /* ── Criteria Boxes ── */
@@ -105,7 +105,7 @@ body {
 .criteria-num {
   display: inline-flex; align-items: center; justify-content: center;
   width: 30px; height: 30px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  background: linear-gradient(135deg, var(--primary), #3b82f6);
   color: #fff; font-weight: 700; font-size: .85rem;
   margin-right: .6rem;
   box-shadow: 0 2px 8px var(--primary-glow);
@@ -114,14 +114,14 @@ body {
 
 /* ── Example Boxes ── */
 .ex-good {
-  background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+  background: #ecfdf5;
   border: 1.5px solid #86efac;
   border-radius: var(--radius-sm); padding: .85rem 1rem; margin: .75rem 0;
   font-size: .9rem; font-style: italic; line-height: 1.65;
 }
 .ex-good b, .ex-bad b { font-style: normal; }
 .ex-bad {
-  background: linear-gradient(135deg, #fef2f2, #fff1f2);
+  background: #fef2f2;
   border: 1.5px solid #fca5a5;
   border-radius: var(--radius-sm); padding: .85rem 1rem; margin: .75rem 0;
   font-size: .9rem; font-style: italic; line-height: 1.65;
@@ -130,25 +130,25 @@ body {
 
 /* ── Tip / Warn Boxes ── */
 .tip-box {
-  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  background: #eff6ff;
   border-left: 4px solid var(--primary);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: .95rem;
-  box-shadow: 0 2px 8px rgba(99,102,241,.08);
+  box-shadow: 0 2px 8px rgba(37,99,235,.06);
 }
 .warn-box {
-  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  background: #fffbeb;
   border-left: 4px solid var(--warn);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: .95rem;
   box-shadow: 0 2px 8px rgba(245,158,11,.08);
 }
 .lang-box {
-  background: linear-gradient(135deg, #e0e7ff, #ede9fe);
-  border-left: 4px solid #7c3aed;
+  background: #eff6ff;
+  border-left: 4px solid var(--primary);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: .95rem;
-  box-shadow: 0 2px 8px rgba(124,58,237,.08);
+  box-shadow: 0 2px 8px rgba(37,99,235,.06);
 }
 
 /* ── Buttons ── */
@@ -160,7 +160,7 @@ body {
   letter-spacing: -.01em;
 }
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  background: linear-gradient(135deg, var(--primary), #3b82f6);
   color: #fff;
   box-shadow: 0 4px 14px var(--primary-glow);
 }
@@ -172,7 +172,7 @@ body {
 }
 .btn-secondary:hover { background: #fff; border-color: var(--gray-300); transform: translateY(-1px); }
 .btn-success {
-  background: linear-gradient(135deg, var(--success), #34d399);
+  background: linear-gradient(135deg, #10b981, #34d399);
   color: #fff;
   box-shadow: 0 4px 14px rgba(16,185,129,.2);
 }
@@ -205,17 +205,17 @@ body {
 .checklist-item label { cursor: pointer; line-height: 1.5; font-size: .92rem; }
 .task-num-badge {
   display: inline-flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  background: linear-gradient(135deg, var(--primary), #3b82f6);
   color: #fff; width: 32px; height: 32px;
   border-radius: 50%; font-weight: 700; font-size: .9rem; margin-right: .5rem;
   box-shadow: 0 2px 8px var(--primary-glow);
 }
 .url-badge {
   display: inline-block;
-  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  background: #eff6ff;
   color: var(--primary-dark);
   padding: .25rem .8rem; border-radius: 999px; font-weight: 600; font-size: .88rem;
-  border: 1px solid rgba(99,102,241,.15);
+  border: 1px solid rgba(37,99,235,.12);
 }
 
 /* ── Pages ── */
@@ -262,7 +262,7 @@ h3 { letter-spacing: -.01em; }
      PAGE 1: 소개
      ════════════════════════════════════════ -->
 <div class="page active" id="page1">
-  <h1 style="font-size:2rem; margin-top:2rem; font-weight:800; background:linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Computer Use Agent를 위한<br>Task 수집 작업</h1>
+  <h1 style="font-size:2rem; margin-top:2rem; font-weight:800; background:linear-gradient(135deg, #1d4ed8, #2563eb, #3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Computer Use Agent를 위한<br>Task 수집 작업</h1>
 
   <div class="card card-accent">
     <h3 style="margin-top:0;">이 작업에서 여러분이 할 일</h3>
@@ -444,7 +444,7 @@ h3 { letter-spacing: -.01em; }
   </div>
 
   <div class="tip-box">
-    <b>작성 팁</b> &nbsp;<span style="background:#4f46e5; color:#fff; font-size:.75rem; padding:.1rem .5rem; border-radius:999px; font-weight:700;">English</span><br>
+    <b>작성 팁</b> &nbsp;<span style="background:#2563eb; color:#fff; font-size:.75rem; padding:.1rem .5rem; border-radius:999px; font-weight:700;">English</span><br>
     &middot; Task는 <b>영어</b>로 작성하세요<br>
     &middot; 먼저 웹사이트를 <b>자유롭게 탐색</b>하세요 (2~3분)<br>
     &middot; "내가 이 사이트를 <b>실제로 사용했던 경험</b>"을 떠올리며 Task를 작성하세요<br>
@@ -498,7 +498,7 @@ h3 { letter-spacing: -.01em; }
      ════════════════════════════════════════ -->
 <div class="page" id="page4">
   <div style="text-align:center; margin-top:4rem;">
-    <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, var(--success), #34d399); color:#fff; font-size:2.2rem; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem; box-shadow:0 8px 25px rgba(16,185,129,.25);">&#10003;</div>
+    <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, #10b981, #34d399); color:#fff; font-size:2.2rem; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem; box-shadow:0 8px 25px rgba(16,185,129,.25);">&#10003;</div>
     <h2 style="margin-top:.5rem;">수고하셨습니다!</h2>
     <p style="color:var(--gray-500); font-size:1.05rem;">모든 Task 작성이 완료되었습니다.</p>
     <div class="card" style="text-align:left; max-width:600px; margin:2rem auto;" id="all-submissions"></div>
