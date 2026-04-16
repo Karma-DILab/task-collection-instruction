@@ -299,28 +299,31 @@ h3 { letter-spacing: -.01em; }
      PAGE 2: 기준 + 예시
      ════════════════════════════════════════ -->
 <div class="page" id="page2">
-  <h2 style="margin-top:2rem;">고품질 Task의 4가지 기준</h2>
+  <h2 style="margin-top:2rem;">고품질 Task 작성 가이드</h2>
 
   <div class="card card-accent" style="margin-bottom:1.25rem;">
     <b style="font-size:1.05rem;">고품질 Task란?</b><br>
-    사용자가 실제 컴퓨터 환경에서 수행할 법하며, <b>구체적인 목표</b>와 <b>명확한 성공 기준</b>을 포함한 Task
+    사용자가 실제 컴퓨터 환경에서 수행할 법하며, <b>구체적인 목표</b>와 <b>명확한 성공 기준</b>을 포함한 Task.<br>
+    1~3문장으로 간결하게, 실제 사용자가 AI 에이전트에게 요청하듯 자연스러운 언어로 작성합니다.
   </div>
 
-  <p>아래 4가지 기준을 <b>모두 만족</b>해야 고품질 Task입니다.</p>
+  <!-- ── 4가지 기준 ── -->
+  <h3 style="margin-top:1.5rem;">4가지 기준</h3>
 
   <div class="criteria-grid">
     <!-- 기준 1: 실용성 -->
     <div class="criteria-item">
       <div><span class="criteria-num">1</span><span class="criteria-title">실용성</span></div>
       <p style="margin:.5rem 0 0; font-size:.9rem;">
-        사용자가 <b>실제 컴퓨터 사용 과정에서 경험한</b>, 인위적이지 않고 <b>유용한</b> Task
+        사용자가 <b>실제 컴퓨터 사용 과정에서 경험한</b>, 인위적이지 않고 <b>유용한</b> Task.<br>
+        <span style="color:var(--gray-500); font-size:.85rem;">단순하거나 즉시 해결 가능한 작업, 또는 실제 목적 없이 인위적으로 어려운 작업은 피합니다.</span>
       </p>
       <div class="ex-good">
         <b>O</b> "Book the cheapest round-trip economy flight from Los Angeles to New York for 1 adult, departing March 20, 2026 and returning March 23, 2026 on united.com."
       </div>
       <div class="ex-bad">
         <b>X</b> "Click 10 buttons in order on YouTube."<br>
-        <span class="ex-reason">&rarr; 실제 사용자가 할 법한 목적이 없음</span>
+        <span class="ex-reason">&rarr; 실제 사용자가 할 법한 목적이 없는 인위적 작업</span>
       </div>
     </div>
 
@@ -328,14 +331,14 @@ h3 { letter-spacing: -.01em; }
     <div class="criteria-item">
       <div><span class="criteria-num">2</span><span class="criteria-title">구체성</span></div>
       <p style="margin:.5rem 0 0; font-size:.9rem;">
-        <b>추가 정보 없이도</b> 수행 가능하고, <b>구체적인 목표</b>가 충분히 제시된 Task
+        <b>추가 정보 없이도</b> 바로 수행 가능하도록, 제품명, 날짜, 수량, 위치, 가격, 평점 등 <b>구체적인 조건</b>을 명시한 Task.
       </p>
       <div class="ex-good">
-        <b>O</b> "On apple.com, compare the price and storage options of the iPhone 17 Pro, and check trade-in value for an iPhone 15."
+        <b>O</b> "On apple.com, compare the price and storage options of the iPhone 17 Pro and check the trade-in value for an iPhone 15."
       </div>
       <div class="ex-bad">
         <b>X</b> "Purchase a memory storage device."<br>
-        <span class="ex-reason">&rarr; 어떤 사이트에서? 어떤 제품을? 정보가 부족</span>
+        <span class="ex-reason">&rarr; 어떤 사이트? 어떤 제품? 날짜/수량 등 조건 누락</span>
       </div>
     </div>
 
@@ -343,14 +346,15 @@ h3 { letter-spacing: -.01em; }
     <div class="criteria-item">
       <div><span class="criteria-num">3</span><span class="criteria-title">객관성</span></div>
       <p style="margin:.5rem 0 0; font-size:.9rem;">
-        완료 조건이 <b>객관적</b>으로 제시되어, 성공 여부를 <b>누구나 동일하게</b> 판단할 수 있는 Task
+        완료 여부를 <b>누가 판단하더라도 동일한 결론</b>을 내릴 수 있는 Task.<br>
+        <span style="color:var(--gray-500); font-size:.85rem;">"인기 있는", "최고의", "추천할 만한" 같은 주관적 표현 대신 객관적 기준을 사용합니다.</span>
       </p>
       <div class="ex-good">
         <b>O</b> "Compare the prices and customer ratings of the Rhino USA Folding Survival Shovel and the iunio 17-inch Folding Survival Shovel on amazon.com."
       </div>
       <div class="ex-bad">
         <b>X</b> "Recommend me a good mascara."<br>
-        <span class="ex-reason">&rarr; "good"의 기준이 사람마다 다름. 사이트도 없음</span>
+        <span class="ex-reason">&rarr; "good"은 주관적. 사이트도 없음. 완료 판단 불가</span>
       </div>
     </div>
 
@@ -358,22 +362,33 @@ h3 { letter-spacing: -.01em; }
     <div class="criteria-item">
       <div><span class="criteria-num">4</span><span class="criteria-title">고수준 목표 지향성</span></div>
       <p style="margin:.5rem 0 0; font-size:.9rem;">
-        <b>절차적 지시(클릭&rarr;입력&rarr;클릭)</b>가 아닌, <b>최종 목표</b> 중심으로 서술된 Task
+        "<b>무엇을 하라</b>"는 명확히, "<b>어떻게 하라</b>"는 작성하지 않습니다.<br>
+        <span style="color:var(--gray-500); font-size:.85rem;">클릭, 스크롤, 입력 순서 등 절차적 지시를 포함하지 않고, 최종 목표만 서술합니다.</span>
       </p>
       <div class="ex-good">
         <b>O</b> "Book a vacation rental in Nice, France for 2 guests, checking in March 20, 2026 and checking out March 23, 2026 on airbnb.com."
       </div>
       <div class="ex-bad">
         <b>X</b> "Select the check-in date, then select the check-out date, then click the search button, then..."<br>
-        <span class="ex-reason">&rarr; 단계별 절차가 아닌, 달성하려는 목표를 쓰세요</span>
+        <span class="ex-reason">&rarr; 절차 나열. 달성하려는 목표만 쓰세요</span>
       </div>
     </div>
   </div>
 
+  <!-- ── Should Not ── -->
+  <div class="warn-box" style="margin-top:1.5rem;">
+    <b>이런 Task는 만들지 마세요</b><br>
+    &middot; 개인정보(실제 이름, 전화번호, 주소 등) 입력이나 로그인을 요구하는 작업<br>
+    &middot; 하나의 Task에 복수 목표를 혼재하는 경우<br>
+    &middot; 웹사이트에 존재하지 않는 허구의 콘텐츠를 기반으로 한 작업<br>
+    &middot; 윤리에 위배되는 작업
+  </div>
+
   <div class="section-divider"></div>
 
-  <h3>웹사이트별 참고 예시</h3>
-  <p style="font-size:.9rem; color:var(--gray-500);">아래는 영감을 얻기 위한 참고용입니다. 그대로 복사하지 마세요.</p>
+  <!-- ── 참고 예시 ── -->
+  <h3>참고 예시</h3>
+  <p style="font-size:.9rem; color:var(--gray-500);">영감을 얻기 위한 참고용입니다. 그대로 복사하지 마세요.</p>
 
   <div class="card" style="padding:1rem;">
     <div><span class="url-badge">booking.com</span> <span style="color:var(--gray-500); font-size:.85rem;">Travel &amp; Tourism</span></div>
@@ -411,11 +426,6 @@ h3 { letter-spacing: -.01em; }
     </ul>
   </div>
 
-  <div class="warn-box">
-    <b>예시를 그대로 복사하면 안 됩니다!</b><br>
-    직접 해당 웹사이트를 방문해보고, <b>본인이 실제로 경험했던 작업</b>을 떠올려 영어로 작성하세요.
-  </div>
-
   <div class="btn-nav">
     <button class="btn btn-secondary" onclick="goPage(1)">&larr; 이전</button>
     <button class="btn btn-primary" onclick="goPage(3)">다음: Task 작성 &rarr;</button>
@@ -443,13 +453,26 @@ h3 { letter-spacing: -.01em; }
     </div>
   </div>
 
-  <div class="tip-box">
-    <b>작성 팁</b> &nbsp;<span style="background:#2563eb; color:#fff; font-size:.75rem; padding:.1rem .5rem; border-radius:999px; font-weight:700;">English</span><br>
-    &middot; Task는 <b>영어</b>로 작성하세요<br>
-    &middot; 먼저 웹사이트를 <b>자유롭게 탐색</b>하세요 (2~3분)<br>
-    &middot; "내가 이 사이트를 <b>실제로 사용했던 경험</b>"을 떠올리며 Task를 작성하세요<br>
-    &middot; <b>서로 다른 기능</b>을 활용하는 Task를 작성하세요 (예약, 구매, 구독, 비교 등)<br>
-    &middot; 이름, 날짜, 숫자 등의 정보는 <b>명시적으로</b> 작성하세요
+  <!-- 단계별 작성 흐름 -->
+  <div class="card" style="padding:1.25rem;">
+    <b style="font-size:1rem;">작성 순서</b> &nbsp;<span style="background:#2563eb; color:#fff; font-size:.75rem; padding:.1rem .5rem; border-radius:999px; font-weight:700;">English</span>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; margin-top:.75rem; text-align:center; font-size:.85rem;">
+      <div style="background:var(--primary-light); border-radius:8px; padding:.6rem .4rem;">
+        <b style="font-size:1.1rem;">1</b><br>URL 접속 및<br><b>자유 탐색</b>
+      </div>
+      <div style="background:var(--primary-light); border-radius:8px; padding:.6rem .4rem;">
+        <b style="font-size:1.1rem;">2</b><br>이 사이트에서의<br><b>목적 떠올리기</b>
+      </div>
+      <div style="background:var(--primary-light); border-radius:8px; padding:.6rem .4rem;">
+        <b style="font-size:1.1rem;">3</b><br>해당 목적을<br><b>직접 수행</b>
+      </div>
+      <div style="background:var(--primary-light); border-radius:8px; padding:.6rem .4rem;">
+        <b style="font-size:1.1rem;">4</b><br>수행 결과를 보고<br><b>영어 Task 작성</b>
+      </div>
+    </div>
+    <p style="font-size:.82rem; color:var(--gray-500); margin-top:.6rem; margin-bottom:0;">
+      사용했던 경험이 있다면 경험에 기반하여 작성합니다. 이름, 날짜, 숫자 등의 정보는 명시적으로 작성하세요.
+    </p>
   </div>
 
   <!-- Task 1 (필수) -->
@@ -461,11 +484,15 @@ h3 { letter-spacing: -.01em; }
     </div>
     <textarea class="task-input" id="task1" rows="3" placeholder="Write your task in English." oninput="updateCount(1)"></textarea>
     <div class="char-count" id="count1">0 characters</div>
-    <div style="margin-top:.6rem; font-size:.88rem; color:var(--gray-700);"><b>자가 점검</b></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-1"><label for="c1-1">실용성 &mdash; 직접 경험해본 적 있는 작업인가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-2"><label for="c1-2">구체성 &mdash; 추가 정보 없이 수행 가능한가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-3"><label for="c1-3">객관성 &mdash; 완료 여부를 누구나 판단할 수 있는가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-4"><label for="c1-4">고수준 목표 &mdash; 절차 나열이 아닌 목표 중심인가?</label></div>
+    <div style="margin-top:.6rem; font-size:.88rem; color:var(--gray-700);"><b>체크리스트</b></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-1"><label for="c1-1">Task를 영어로 작성했는가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-2"><label for="c1-2">추가 정보 없이 바로 수행 가능할 만큼 구체적인가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-3"><label for="c1-3">완료와 성공 여부를 누구나 객관적으로 판단할 수 있는가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-4"><label for="c1-4">최종 목표 중심으로 작성했는가? (절차적 지시 없음)</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-5"><label for="c1-5">하나의 명확한 목표에 집중하는가? (복수 목표 혼재 없음)</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-6"><label for="c1-6">실제 사용자가 경험했거나 수행할 법한 의미 있는 작업인가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-7"><label for="c1-7">로그인이나 개인정보 입력을 요구하지 않는가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-8"><label for="c1-8">Task에 언급된 콘텐츠가 웹사이트에 실제로 존재하는가?</label></div>
   </div>
 
   <!-- 추가 Task들이 여기에 삽입됨 -->
@@ -615,11 +642,15 @@ function addTask() {
     '</div>' +
     '<textarea class="task-input" id="task' + n + '" rows="3" placeholder="Write your task in English." oninput="updateCount(' + n + ')"></textarea>' +
     '<div class="char-count" id="count' + n + '">0 characters</div>' +
-    '<div style="margin-top:.6rem; font-size:.88rem; color:var(--gray-700);"><b>자가 점검</b></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-1"><label for="c' + n + '-1">실용성 — 직접 경험해본 적 있는 작업인가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-2"><label for="c' + n + '-2">구체성 — 추가 정보 없이 수행 가능한가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-3"><label for="c' + n + '-3">객관성 — 완료 여부를 누구나 판단할 수 있는가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-4"><label for="c' + n + '-4">고수준 목표 — 절차 나열이 아닌 목표 중심인가?</label></div>' +
+    '<div style="margin-top:.6rem; font-size:.88rem; color:var(--gray-700);"><b>체크리스트</b></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-1"><label for="c' + n + '-1">Task를 영어로 작성했는가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-2"><label for="c' + n + '-2">추가 정보 없이 바로 수행 가능할 만큼 구체적인가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-3"><label for="c' + n + '-3">완료와 성공 여부를 누구나 객관적으로 판단할 수 있는가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-4"><label for="c' + n + '-4">최종 목표 중심으로 작성했는가? (절차적 지시 없음)</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-5"><label for="c' + n + '-5">하나의 명확한 목표에 집중하는가? (복수 목표 혼재 없음)</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-6"><label for="c' + n + '-6">실제 사용자가 경험했거나 수행할 법한 의미 있는 작업인가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-7"><label for="c' + n + '-7">로그인이나 개인정보 입력을 요구하지 않는가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-8"><label for="c' + n + '-8">Task에 언급된 콘텐츠가 웹사이트에 실제로 존재하는가?</label></div>' +
   '</div>';
   document.getElementById('task-container').insertAdjacentHTML('beforeend', html);
 }
@@ -668,11 +699,11 @@ function validateTasks() {
       errEl.textContent = 'Task ' + t.num + '이(가) 너무 짧습니다 (최소 15자).';
       return null;
     }
-    for (var c = 1; c <= 4; c++) {
+    for (var c = 1; c <= 8; c++) {
       var cb = document.getElementById('c' + t.num + '-' + c);
       if (cb && !cb.checked) {
         errEl.style.display = 'block';
-        errEl.textContent = 'Task ' + t.num + '의 자가 점검을 모두 체크해주세요.';
+        errEl.textContent = 'Task ' + t.num + '의 체크리스트를 모두 체크해주세요.';
         return null;
       }
     }
@@ -690,7 +721,7 @@ function resetPage3() {
   document.getElementById('task-container').innerHTML = '';
   document.getElementById('task1').value = '';
   document.getElementById('count1').textContent = '0 characters';
-  for (var c = 1; c <= 4; c++) { document.getElementById('c1-' + c).checked = false; }
+  for (var c = 1; c <= 8; c++) { var el = document.getElementById('c1-' + c); if (el) el.checked = false; }
   nextTaskId = 2;
   document.getElementById('submit-error').style.display = 'none';
   randomizeUrl();
