@@ -247,11 +247,13 @@ h3 { letter-spacing: -.01em; }
   <div class="progress-steps">
     <div><div class="step-dot active" id="sd1">1</div><div class="step-label">소개</div></div>
     <div class="step-line" id="sl1"></div>
-    <div><div class="step-dot" id="sd2">2</div><div class="step-label">기준+예시</div></div>
+    <div><div class="step-dot" id="sd2">2</div><div class="step-label">기준</div></div>
     <div class="step-line" id="sl2"></div>
-    <div><div class="step-dot" id="sd3">3</div><div class="step-label">작성</div></div>
+    <div><div class="step-dot" id="sd3">3</div><div class="step-label">연습</div></div>
     <div class="step-line" id="sl3"></div>
-    <div><div class="step-dot" id="sd4">4</div><div class="step-label">완료</div></div>
+    <div><div class="step-dot" id="sd4">4</div><div class="step-label">작성</div></div>
+    <div class="step-line" id="sl4"></div>
+    <div><div class="step-dot" id="sd5">5</div><div class="step-label">완료</div></div>
   </div>
 </div>
 </div>
@@ -428,14 +430,95 @@ h3 { letter-spacing: -.01em; }
 
   <div class="btn-nav">
     <button class="btn btn-secondary" onclick="goPage(1)">&larr; 이전</button>
-    <button class="btn btn-primary" onclick="goPage(3)">다음: Task 작성 &rarr;</button>
+    <button class="btn btn-primary" onclick="goPage(3)">다음: 연습 &rarr;</button>
   </div>
 </div>
 
 <!-- ════════════════════════════════════════
-     PAGE 3: Task 작성
+     PAGE 3: 연습
      ════════════════════════════════════════ -->
 <div class="page" id="page3">
+  <h2 style="margin-top:2rem;">연습: 절차를 따라 Task 만들기</h2>
+  <p>실제 작성 전에 아래 예시를 통해 절차를 익혀보세요.</p>
+
+  <div class="card card-accent">
+    <b>예시 URL: <a href="https://nike.com" target="_blank" style="color:var(--primary);">nike.com</a></b>
+    <div style="margin-top:1rem;">
+
+      <!-- Step 1 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
+        <span class="task-num-badge" style="flex-shrink:0;">1</span>
+        <div style="flex:1;">
+          <b>URL 접속 및 자유 탐색</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">웹사이트에 접속하여 어떤 기능이 있는지 자유롭게 둘러봅니다.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
+        <span class="task-num-badge" style="flex-shrink:0;">2</span>
+        <div style="flex:1;">
+          <b>이 사이트에서의 목적 작성</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 .5rem;">사용했던 경험이 있다면 경험에 기반하여, 이 사이트에서 무엇을 할 것인지 목적을 작성합니다.</p>
+          <div style="background:var(--primary-light); padding:.6rem .8rem; border-radius:8px; font-size:.9rem;">
+            <b>목적 예시:</b> "아이보리 색의 러닝화 사기"
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
+        <span class="task-num-badge" style="flex-shrink:0;">3</span>
+        <div style="flex:1;">
+          <b>해당 목적을 직접 수행</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">실제로 웹사이트에서 해당 목적을 수행합니다. 마지막 도달한 페이지를 확인하세요.</p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start;">
+        <span class="task-num-badge" style="flex-shrink:0;">4</span>
+        <div style="flex:1;">
+          <b>마지막 페이지를 보고 구체적인 Task 작성</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 .5rem;">수행한 결과를 바탕으로, 구체적인 조건을 포함한 영어 Task를 작성합니다.</p>
+          <div style="background:#ecfdf5; border:1.5px solid #86efac; padding:.6rem .8rem; border-radius:8px; font-size:.9rem; font-style:italic;">
+            "Purchase Nike Vomero 18 women's running shoes in ivory, regular fit, size 7."
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 두 번째 예시 (Information search) -->
+  <div class="card" style="margin-top:1rem;">
+    <b>예시 URL: <a href="https://espn.com" target="_blank" style="color:var(--primary);">espn.com</a></b> <span style="font-size:.82rem; color:var(--gray-500);">— Information Search 유형</span>
+    <div style="margin-top:.75rem; display:grid; grid-template-columns:1fr 1fr; gap:.75rem; font-size:.88rem;">
+      <div>
+        <b>목적:</b> "경기 순위 확인"
+      </div>
+      <div>
+        <b>Task:</b> <i>"Did Scottie Scheffler play in Masters Tournament this year? What was his score and position on leaderboard?"</i>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:1.25rem;">
+    <b>핵심 포인트</b><br>
+    &middot; 목적은 한글로 간단히, Task는 <b>영어로 구체적</b>으로 작성합니다.<br>
+    &middot; <b>직접 수행한 뒤</b> 마지막 페이지를 보고 Task를 작성하면 자연스럽게 구체적인 조건이 포함됩니다.
+  </div>
+
+  <div class="btn-nav">
+    <button class="btn btn-secondary" onclick="goPage(2)">&larr; 이전</button>
+    <button class="btn btn-primary" onclick="goPage(4)">다음: Task 작성 &rarr;</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PAGE 4: Task 작성
+     ════════════════════════════════════════ -->
+<div class="page" id="page4">
   <h2 style="margin-top:2rem;">Task 작성</h2>
 
   <!-- URL 랜덤 배정 -->
@@ -448,51 +531,48 @@ h3 { letter-spacing: -.01em; }
     <div style="margin-top:.75rem;">
       <button class="btn btn-secondary" onclick="randomizeUrl()" style="font-size:.85rem; padding:.4rem 1rem;">다른 웹사이트 배정받기</button>
     </div>
-    <div style="font-size:.85rem; color:var(--gray-500); margin-top:.5rem;">
-      작성 전, 위 링크를 클릭하여 웹사이트를 직접 방문해보세요.
-    </div>
   </div>
 
-  <!-- 단계별 작성 흐름 -->
-  <div class="card" style="padding:1.25rem;">
-    <b style="font-size:1rem;">작성 순서</b> &nbsp;<span style="background:#2563eb; color:#fff; font-size:.75rem; padding:.1rem .5rem; border-radius:999px; font-weight:700;">English</span>
-    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; margin-top:.75rem; text-align:center; font-size:.85rem;">
-      <div style="background:var(--primary-light); border-radius:8px; padding:.6rem .4rem;">
-        <b style="font-size:1.1rem;">1</b><br>URL 접속 및<br><b>자유 탐색</b>
-      </div>
-      <div style="background:var(--primary-light); border-radius:8px; padding:.6rem .4rem;">
-        <b style="font-size:1.1rem;">2</b><br>이 사이트에서의<br><b>목적 떠올리기</b>
-      </div>
-      <div style="background:var(--primary-light); border-radius:8px; padding:.6rem .4rem;">
-        <b style="font-size:1.1rem;">3</b><br>해당 목적을<br><b>직접 수행</b>
-      </div>
-      <div style="background:var(--primary-light); border-radius:8px; padding:.6rem .4rem;">
-        <b style="font-size:1.1rem;">4</b><br>수행 결과를 보고<br><b>영어 Task 작성</b>
-      </div>
-    </div>
-    <p style="font-size:.82rem; color:var(--gray-500); margin-top:.6rem; margin-bottom:0;">
-      사용했던 경험이 있다면 경험에 기반하여 작성합니다. 이름, 날짜, 숫자 등의 정보는 명시적으로 작성하세요.
-    </p>
-  </div>
-
-  <!-- Task 1 (필수) -->
+  <!-- Task 1 (필수, 단계별) -->
   <div class="card" id="task-block-1">
-    <div style="display:flex; align-items:center; margin-bottom:.75rem;">
+    <div style="display:flex; align-items:center; margin-bottom:1rem;">
       <span class="task-num-badge">1</span>
       <span style="font-weight:700; font-size:1.05rem;">Task 1</span>
       <span style="font-size:.75rem; color:var(--danger); margin-left:.5rem; font-weight:600;">필수</span>
     </div>
-    <textarea class="task-input" id="task1" rows="3" placeholder="Write your task in English." oninput="updateCount(1)"></textarea>
-    <div class="char-count" id="count1">0 characters</div>
+
+    <!-- Step 1: 탐색 -->
+    <div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--gray-200);">
+      <b style="font-size:.9rem;">Step 1.</b> <span style="font-size:.88rem;">위 URL에 접속하여 자유롭게 탐색하세요.</span>
+    </div>
+
+    <!-- Step 2: 목적 -->
+    <div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--primary);">
+      <b style="font-size:.9rem;">Step 2.</b> <span style="font-size:.88rem;">이 사이트에서의 <b>목적</b>을 작성하세요.</span>
+      <p style="font-size:.8rem; color:var(--gray-500); margin:.2rem 0 .4rem;">사용했던 경험이 있다면 경험에 기반하여 작성합니다. 한글도 가능합니다.</p>
+      <input type="text" class="task-input" id="purpose1" placeholder='예: "아이보리 색의 러닝화 사기"' style="padding:.5rem .7rem;">
+    </div>
+
+    <!-- Step 3: 수행 -->
+    <div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--gray-200);">
+      <b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">해당 목적을 웹사이트에서 <b>직접 수행</b>하세요.</span>
+    </div>
+
+    <!-- Step 4: Task 작성 -->
+    <div style="margin-bottom:.75rem; padding-left:.5rem; border-left:3px solid var(--primary);">
+      <b style="font-size:.9rem;">Step 4.</b> <span style="font-size:.88rem;">마지막 페이지를 보고 <b>구체적인 Task를 영어로</b> 작성하세요.</span>
+      <textarea class="task-input" id="task1" rows="3" placeholder='예: "Purchase Nike Vomero 18 women&#39;s running shoes in ivory, regular fit, size 7."' oninput="updateCount(1)" style="margin-top:.4rem;"></textarea>
+      <div class="char-count" id="count1">0 characters</div>
+    </div>
+
+    <!-- 체크리스트 (6개) -->
     <div style="margin-top:.6rem; font-size:.88rem; color:var(--gray-700);"><b>체크리스트</b></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-1"><label for="c1-1">Task를 영어로 작성했는가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-2"><label for="c1-2">추가 정보 없이 바로 수행 가능할 만큼 구체적인가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-3"><label for="c1-3">완료와 성공 여부를 누구나 객관적으로 판단할 수 있는가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-4"><label for="c1-4">최종 목표 중심으로 작성했는가? (절차적 지시 없음)</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-5"><label for="c1-5">하나의 명확한 목표에 집중하는가? (복수 목표 혼재 없음)</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-6"><label for="c1-6">실제 사용자가 경험했거나 수행할 법한 의미 있는 작업인가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-7"><label for="c1-7">로그인이나 개인정보 입력을 요구하지 않는가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-8"><label for="c1-8">Task에 언급된 콘텐츠가 웹사이트에 실제로 존재하는가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-1"><label for="c1-1">추가 정보 없이 바로 수행 가능할 만큼 구체적인가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-2"><label for="c1-2">완료와 성공 여부를 누구나 객관적으로 판단할 수 있는가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-3"><label for="c1-3">최종 목표 중심으로 작성되었는가? (절차적 지시인 클릭, 스크롤 등을 포함하지 않음)</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-4"><label for="c1-4">로그인이나 개인정보 입력을 요구하지 않는가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-5"><label for="c1-5">URL이 공개 접근 가능하고, Task와 관련된 페이지인가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-6"><label for="c1-6">Task에 언급된 콘텐츠가 웹사이트에 실제로 존재하는가?</label></div>
   </div>
 
   <!-- 추가 Task들이 여기에 삽입됨 -->
@@ -503,16 +583,10 @@ h3 { letter-spacing: -.01em; }
     <button class="btn btn-secondary" onclick="addTask()" id="add-task-btn" style="font-size:.9rem;">+ Task 추가</button>
   </div>
 
-  <div class="warn-box">
-    <b>제출 전 확인</b><br>
-    &middot;  Task를 <b>영어</b>로 작성했나요?<br>
-    &middot;  개인정보가 포함되어 있지 않나요?
-  </div>
-
   <div id="submit-error" style="display:none; color:var(--danger); font-weight:600; margin-top:1rem; text-align:center;"></div>
 
   <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2rem; flex-wrap:wrap; gap:.75rem;">
-    <button class="btn btn-secondary" onclick="goPage(2)">&larr; 이전</button>
+    <button class="btn btn-secondary" onclick="goPage(3)">&larr; 이전</button>
     <div style="display:flex; gap:.75rem;">
       <button class="btn btn-success" onclick="submitAndNewUrl()">제출 &amp; 다른 웹사이트</button>
       <button class="btn btn-primary" onclick="submitAndFinish()">제출 &amp; 끝내기</button>
@@ -521,9 +595,9 @@ h3 { letter-spacing: -.01em; }
 </div>
 
 <!-- ════════════════════════════════════════
-     PAGE 4: 완료
+     PAGE 5: 완료
      ════════════════════════════════════════ -->
-<div class="page" id="page4">
+<div class="page" id="page5">
   <div style="text-align:center; margin-top:4rem;">
     <div style="width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, #10b981, #34d399); color:#fff; font-size:2.2rem; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem; box-shadow:0 8px 25px rgba(16,185,129,.25);">&#10003;</div>
     <h2 style="margin-top:.5rem;">수고하셨습니다!</h2>
@@ -630,27 +704,41 @@ function randomizeUrl() {
   document.getElementById('url-category').textContent = 'Category: ' + currentUrl.category;
 }
 
+var CHECKLIST_COUNT = 6;
+
 function addTask() {
   var n = nextTaskId++;
   var html = '<div class="card" id="task-block-' + n + '">' +
-    '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:.75rem;">' +
+    '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">' +
       '<div style="display:flex; align-items:center;">' +
         '<span class="task-num-badge">' + n + '</span>' +
         '<span style="font-weight:700; font-size:1.05rem;">Task ' + n + '</span>' +
       '</div>' +
       '<button class="btn btn-secondary" onclick="removeTask(' + n + ')" style="font-size:.75rem; padding:.25rem .7rem; color:var(--danger);">삭제</button>' +
     '</div>' +
-    '<textarea class="task-input" id="task' + n + '" rows="3" placeholder="Write your task in English." oninput="updateCount(' + n + ')"></textarea>' +
-    '<div class="char-count" id="count' + n + '">0 characters</div>' +
+    '<div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--gray-200);">' +
+      '<b style="font-size:.9rem;">Step 1.</b> <span style="font-size:.88rem;">위 URL에 접속하여 자유롭게 탐색하세요.</span>' +
+    '</div>' +
+    '<div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--primary);">' +
+      '<b style="font-size:.9rem;">Step 2.</b> <span style="font-size:.88rem;">이 사이트에서의 <b>목적</b>을 작성하세요.</span>' +
+      '<p style="font-size:.8rem; color:var(--gray-500); margin:.2rem 0 .4rem;">사용했던 경험이 있다면 경험에 기반하여 작성합니다. 한글도 가능합니다.</p>' +
+      '<input type="text" class="task-input" id="purpose' + n + '" placeholder=\'예: "아이보리 색의 러닝화 사기"\' style="padding:.5rem .7rem;">' +
+    '</div>' +
+    '<div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--gray-200);">' +
+      '<b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">해당 목적을 웹사이트에서 <b>직접 수행</b>하세요.</span>' +
+    '</div>' +
+    '<div style="margin-bottom:.75rem; padding-left:.5rem; border-left:3px solid var(--primary);">' +
+      '<b style="font-size:.9rem;">Step 4.</b> <span style="font-size:.88rem;">마지막 페이지를 보고 <b>구체적인 Task를 영어로</b> 작성하세요.</span>' +
+      '<textarea class="task-input" id="task' + n + '" rows="3" placeholder=\'예: "Purchase Nike Vomero 18 women&#39;s running shoes in ivory, regular fit, size 7."\' oninput="updateCount(' + n + ')" style="margin-top:.4rem;"></textarea>' +
+      '<div class="char-count" id="count' + n + '">0 characters</div>' +
+    '</div>' +
     '<div style="margin-top:.6rem; font-size:.88rem; color:var(--gray-700);"><b>체크리스트</b></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-1"><label for="c' + n + '-1">Task를 영어로 작성했는가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-2"><label for="c' + n + '-2">추가 정보 없이 바로 수행 가능할 만큼 구체적인가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-3"><label for="c' + n + '-3">완료와 성공 여부를 누구나 객관적으로 판단할 수 있는가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-4"><label for="c' + n + '-4">최종 목표 중심으로 작성했는가? (절차적 지시 없음)</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-5"><label for="c' + n + '-5">하나의 명확한 목표에 집중하는가? (복수 목표 혼재 없음)</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-6"><label for="c' + n + '-6">실제 사용자가 경험했거나 수행할 법한 의미 있는 작업인가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-7"><label for="c' + n + '-7">로그인이나 개인정보 입력을 요구하지 않는가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-8"><label for="c' + n + '-8">Task에 언급된 콘텐츠가 웹사이트에 실제로 존재하는가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-1"><label for="c' + n + '-1">추가 정보 없이 바로 수행 가능할 만큼 구체적인가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-2"><label for="c' + n + '-2">완료와 성공 여부를 누구나 객관적으로 판단할 수 있는가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-3"><label for="c' + n + '-3">최종 목표 중심으로 작성되었는가? (절차적 지시인 클릭, 스크롤 등을 포함하지 않음)</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-4"><label for="c' + n + '-4">로그인이나 개인정보 입력을 요구하지 않는가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-5"><label for="c' + n + '-5">URL이 공개 접근 가능하고, Task와 관련된 페이지인가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-6"><label for="c' + n + '-6">Task에 언급된 콘텐츠가 웹사이트에 실제로 존재하는가?</label></div>' +
   '</div>';
   document.getElementById('task-container').insertAdjacentHTML('beforeend', html);
 }
@@ -674,8 +762,10 @@ function collectTasks() {
     var block = blocks[i];
     var num = block.id.replace('task-block-', '');
     var ta = document.getElementById('task' + num);
+    var pu = document.getElementById('purpose' + num);
     var text = ta ? ta.value.trim() : '';
-    tasks.push({ num: num, text: text });
+    var purpose = pu ? pu.value.trim() : '';
+    tasks.push({ num: num, text: text, purpose: purpose });
   }
   return tasks;
 }
@@ -694,12 +784,17 @@ function validateTasks() {
   var tasks = collectTasks();
   for (var i = 0; i < tasks.length; i++) {
     var t = tasks[i];
-    if (t.text.length < 15) {
+    if (!t.purpose || t.purpose.length < 2) {
       errEl.style.display = 'block';
-      errEl.textContent = 'Task ' + t.num + '이(가) 너무 짧습니다 (최소 15자).';
+      errEl.textContent = 'Task ' + t.num + '의 목적(Step 2)을 작성해주세요.';
       return null;
     }
-    for (var c = 1; c <= 8; c++) {
+    if (t.text.length < 15) {
+      errEl.style.display = 'block';
+      errEl.textContent = 'Task ' + t.num + '의 Task(Step 4)가 너무 짧습니다 (최소 15자).';
+      return null;
+    }
+    for (var c = 1; c <= CHECKLIST_COUNT; c++) {
       var cb = document.getElementById('c' + t.num + '-' + c);
       if (cb && !cb.checked) {
         errEl.style.display = 'block';
@@ -712,16 +807,21 @@ function validateTasks() {
 }
 
 function saveSubmission(tasks) {
-  var submission = { url: currentUrl.url, category: currentUrl.category, tasks: tasks.map(function(t) { return t.text; }) };
+  var submission = {
+    url: currentUrl.url,
+    category: currentUrl.category,
+    tasks: tasks.map(function(t) { return { purpose: t.purpose, task: t.text }; })
+  };
   allSubmissions.push(submission);
   return submission;
 }
 
-function resetPage3() {
+function resetTaskPage() {
   document.getElementById('task-container').innerHTML = '';
   document.getElementById('task1').value = '';
+  document.getElementById('purpose1').value = '';
   document.getElementById('count1').textContent = '0 characters';
-  for (var c = 1; c <= 8; c++) { var el = document.getElementById('c1-' + c); if (el) el.checked = false; }
+  for (var c = 1; c <= CHECKLIST_COUNT; c++) { var el = document.getElementById('c1-' + c); if (el) el.checked = false; }
   nextTaskId = 2;
   document.getElementById('submit-error').style.display = 'none';
   randomizeUrl();
@@ -732,7 +832,7 @@ function submitAndNewUrl() {
   var tasks = validateTasks();
   if (!tasks) return;
   saveSubmission(tasks);
-  resetPage3();
+  resetTaskPage();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -743,7 +843,7 @@ function submitAndFinish() {
   saveSubmission(tasks);
   showFinalSummary();
   downloadJSON();
-  goPage(4);
+  goPage(5);
 }
 
 function showFinalSummary() {
@@ -752,7 +852,12 @@ function showFinalSummary() {
   allSubmissions.forEach(function(s, idx) {
     html += '<div style="margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid var(--gray-200);">';
     html += '<p style="margin:0;"><b>' + (idx+1) + '. ' + s.url + '</b> <span style="color:var(--gray-500); font-size:.8rem;">(' + s.category + ')</span></p>';
-    s.tasks.forEach(function(t, i) { html += '<p style="margin:.2rem 0 .2rem 1rem; font-size:.9rem;">' + (i+1) + '. ' + t + '</p>'; });
+    s.tasks.forEach(function(t, i) {
+      html += '<div style="margin:.4rem 0 .4rem 1rem; font-size:.88rem;">';
+      html += '<span style="color:var(--gray-500);">' + (i+1) + '. 목적:</span> ' + t.purpose + '<br>';
+      html += '<span style="color:var(--gray-500);">Task:</span> ' + t.task;
+      html += '</div>';
+    });
     html += '</div>';
   });
   html += '<p style="font-weight:700;">총 ' + totalTasks + '개 Task / ' + allSubmissions.length + '개 웹사이트</p>';
@@ -792,7 +897,7 @@ window.addEventListener('DOMContentLoaded', function() {
   randomizeUrl();
 });
 
-var TOTAL_PAGES = 4;
+var TOTAL_PAGES = 5;
 var currentPage = 1;
 
 function goPage(n) {
