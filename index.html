@@ -553,9 +553,11 @@ h3 { letter-spacing: -.01em; }
       <input type="text" class="task-input" id="purpose1" placeholder='예: "아이보리 색의 러닝화 사기"' style="padding:.5rem .7rem;">
     </div>
 
-    <!-- Step 3: 수행 -->
-    <div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--gray-200);">
-      <b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">해당 목적을 웹사이트에서 <b>직접 수행</b>하세요.</span>
+    <!-- Step 3: 수행 + 최종 URL -->
+    <div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--primary);">
+      <b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">해당 목적을 웹사이트에서 <b>직접 수행</b>하고, 마지막 도달한 페이지의 URL을 붙여넣으세요.</span>
+      <p style="font-size:.8rem; color:var(--gray-500); margin:.2rem 0 .4rem;">로그인 없이 누구나 접속할 수 있고, Task에 언급된 콘텐츠가 실제로 존재하는 공개 URL이어야 합니다.</p>
+      <input type="text" class="task-input" id="finalurl1" placeholder="예: https://www.nike.com/w/womens-running-shoes-37v7jz5e1x6" style="padding:.5rem .7rem;">
     </div>
 
     <!-- Step 4: Task 작성 -->
@@ -724,8 +726,10 @@ function addTask() {
       '<p style="font-size:.8rem; color:var(--gray-500); margin:.2rem 0 .4rem;">사용했던 경험이 있다면 경험에 기반하여 작성합니다. 한글도 가능합니다.</p>' +
       '<input type="text" class="task-input" id="purpose' + n + '" placeholder=\'예: "아이보리 색의 러닝화 사기"\' style="padding:.5rem .7rem;">' +
     '</div>' +
-    '<div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--gray-200);">' +
-      '<b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">해당 목적을 웹사이트에서 <b>직접 수행</b>하세요.</span>' +
+    '<div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--primary);">' +
+      '<b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">해당 목적을 웹사이트에서 <b>직접 수행</b>하고, 마지막 도달한 페이지의 URL을 붙여넣으세요.</span>' +
+      '<p style="font-size:.8rem; color:var(--gray-500); margin:.2rem 0 .4rem;">로그인 없이 누구나 접속할 수 있고, Task에 언급된 콘텐츠가 실제로 존재하는 공개 URL이어야 합니다.</p>' +
+      '<input type="text" class="task-input" id="finalurl' + n + '" placeholder="예: https://www.nike.com/w/womens-running-shoes-37v7jz5e1x6" style="padding:.5rem .7rem;">' +
     '</div>' +
     '<div style="margin-bottom:.75rem; padding-left:.5rem; border-left:3px solid var(--primary);">' +
       '<b style="font-size:.9rem;">Step 4.</b> <span style="font-size:.88rem;">마지막 페이지를 보고 <b>구체적인 Task를 영어로</b> 작성하세요.</span>' +
@@ -763,9 +767,11 @@ function collectTasks() {
     var num = block.id.replace('task-block-', '');
     var ta = document.getElementById('task' + num);
     var pu = document.getElementById('purpose' + num);
+    var fu = document.getElementById('finalurl' + num);
     var text = ta ? ta.value.trim() : '';
     var purpose = pu ? pu.value.trim() : '';
-    tasks.push({ num: num, text: text, purpose: purpose });
+    var finalurl = fu ? fu.value.trim() : '';
+    tasks.push({ num: num, text: text, purpose: purpose, finalurl: finalurl });
   }
   return tasks;
 }
@@ -789,6 +795,11 @@ function validateTasks() {
       errEl.textContent = 'Task ' + t.num + '의 목적(Step 2)을 작성해주세요.';
       return null;
     }
+    if (!t.finalurl || t.finalurl.length < 5) {
+      errEl.style.display = 'block';
+      errEl.textContent = 'Task ' + t.num + '의 최종 URL(Step 3)을 입력해주세요.';
+      return null;
+    }
     if (t.text.length < 15) {
       errEl.style.display = 'block';
       errEl.textContent = 'Task ' + t.num + '의 Task(Step 4)가 너무 짧습니다 (최소 15자).';
@@ -810,7 +821,7 @@ function saveSubmission(tasks) {
   var submission = {
     url: currentUrl.url,
     category: currentUrl.category,
-    tasks: tasks.map(function(t) { return { purpose: t.purpose, task: t.text }; })
+    tasks: tasks.map(function(t) { return { purpose: t.purpose, final_url: t.finalurl, task: t.text }; })
   };
   allSubmissions.push(submission);
   return submission;
@@ -820,6 +831,7 @@ function resetTaskPage() {
   document.getElementById('task-container').innerHTML = '';
   document.getElementById('task1').value = '';
   document.getElementById('purpose1').value = '';
+  document.getElementById('finalurl1').value = '';
   document.getElementById('count1').textContent = '0 characters';
   for (var c = 1; c <= CHECKLIST_COUNT; c++) { var el = document.getElementById('c1-' + c); if (el) el.checked = false; }
   nextTaskId = 2;
@@ -855,6 +867,7 @@ function showFinalSummary() {
     s.tasks.forEach(function(t, i) {
       html += '<div style="margin:.4rem 0 .4rem 1rem; font-size:.88rem;">';
       html += '<span style="color:var(--gray-500);">' + (i+1) + '. 목적:</span> ' + t.purpose + '<br>';
+      html += '<span style="color:var(--gray-500);">URL:</span> ' + t.final_url + '<br>';
       html += '<span style="color:var(--gray-500);">Task:</span> ' + t.task;
       html += '</div>';
     });
