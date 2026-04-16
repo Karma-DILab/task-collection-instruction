@@ -38,7 +38,7 @@ body {
   margin: 0;
   min-height: 100vh;
 }
-.wrap { max-width: 780px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem 4rem; }
 
 /* ── Progress Bar ── */
 .progress-wrap {
@@ -72,6 +72,7 @@ body {
 }
 .step-line { width: 40px; height: 3px; background: var(--gray-200); border-radius: 2px; transition: .4s; }
 .step-line.done { background: linear-gradient(90deg, var(--success), #34d399); }
+.progress-steps > div { display: flex; flex-direction: column; align-items: center; }
 .step-label { font-size: .7rem; text-align: center; color: var(--gray-500); margin-top: .25rem; font-weight: 500; }
 
 /* ── Cards ── */
@@ -249,7 +250,7 @@ h3 { letter-spacing: -.01em; }
     <div class="step-line" id="sl1"></div>
     <div><div class="step-dot" id="sd2">2</div><div class="step-label">기준</div></div>
     <div class="step-line" id="sl2"></div>
-    <div><div class="step-dot" id="sd3">3</div><div class="step-label">연습</div></div>
+    <div><div class="step-dot" id="sd3">3</div><div class="step-label">작성 방법</div></div>
     <div class="step-line" id="sl3"></div>
     <div><div class="step-dot" id="sd4">4</div><div class="step-label">작성</div></div>
     <div class="step-line" id="sl4"></div>
@@ -264,7 +265,7 @@ h3 { letter-spacing: -.01em; }
      PAGE 1: 소개
      ════════════════════════════════════════ -->
 <div class="page active" id="page1">
-  <h1 style="font-size:2rem; margin-top:2rem; font-weight:800; background:linear-gradient(135deg, #1d4ed8, #2563eb, #3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Computer Use Agent를 위한<br>Task 수집 작업</h1>
+  <h1 style="font-size:2rem; margin-top:2rem; font-weight:800; background:linear-gradient(135deg, #1d4ed8, #2563eb, #3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Computer Use Agent를 위한 Task 수집 작업</h1>
 
   <div class="card card-accent">
     <h3 style="margin-top:0;">이 작업에서 여러분이 할 일</h3>
@@ -280,20 +281,15 @@ h3 { letter-spacing: -.01em; }
     예: <i>"Book the cheapest hotel in Paris for 2 adults from March 20 to 23, 2026 on booking.com."</i>
   </div>
 
-  <div class="lang-box">
-    <b>Task는 반드시 영어(English)로 작성하세요!</b><br>
-    여러분이 작성하는 <b>Task 문장은 반드시 영어</b>여야 합니다.<br>
-  </div>
-
   <div class="warn-box">
     <b>주의사항</b><br>
     ・개인정보(실제 이름, 전화번호, 주소 등)는 절대 입력하지 마세요.<br>
-    ・윤리에 위배되는 Task는 절대 작성하지 마세요.
+    ・윤리에 위배되는 Task는 절대 작성하지 마세요(도박, 성인, 저작권 위배 등).
   </div>
 
   <div class="btn-nav">
     <div></div>
-    <button class="btn btn-primary" onclick="goPage(2)">다음: 기준 & 예시 &rarr;</button>
+    <button class="btn btn-primary" onclick="goPage(2)">다음: 기준</button>
   </div>
 </div>
 
@@ -305,8 +301,8 @@ h3 { letter-spacing: -.01em; }
 
   <div class="card card-accent" style="margin-bottom:1.25rem;">
     <b style="font-size:1.05rem;">고품질 Task란?</b><br>
-    사용자가 실제 컴퓨터 환경에서 수행할 법하며, <b>구체적인 목표</b>와 <b>명확한 성공 기준</b>을 포함한 Task.<br>
-    1~3문장으로 간결하게, 실제 사용자가 AI 에이전트에게 요청하듯 자연스러운 언어로 작성합니다.
+    사용자가 실제 컴퓨터 환경에서 수행하는 <b>구체적인 목표</b>와 <b>명확한 성공 기준</b>을 포함한 Task를 의미합니다.<br>
+    <span style="font-size:.9rem;">타인이 이 Task를 읽었을 때 추가 정보 없이도 무엇을 해야 하는지 정확히 이해할 수 있고, 완료 여부를 객관적으로 판단할 수 있어야 합니다.</span>
   </div>
 
   <!-- ── 4가지 기준 ── -->
@@ -316,63 +312,118 @@ h3 { letter-spacing: -.01em; }
     <!-- 기준 1: 실용성 -->
     <div class="criteria-item">
       <div><span class="criteria-num">1</span><span class="criteria-title">실용성</span></div>
-      <p style="margin:.5rem 0 0; font-size:.9rem;">
-        사용자가 <b>실제 컴퓨터 사용 과정에서 경험한</b>, 인위적이지 않고 <b>유용한</b> Task.<br>
-        <span style="color:var(--gray-500); font-size:.85rem;">단순하거나 즉시 해결 가능한 작업, 또는 실제 목적 없이 인위적으로 어려운 작업은 피합니다.</span>
+      <p style="margin:.5rem 0 0; font-size:1.1rem;">
+        실제 사용자가 해당 웹사이트에서 <b>할 법한</b>, 인위적이지 않고 <b>유용한</b> 작업이어야 한다.
       </p>
+      <p style="margin:.4rem 0 0; font-size:.95rem; color:var(--gray-700); line-height:1.6;">
+        "이 작업을 실제로 누군가 하려고 할까?"를 기준으로 판단하세요.
+      </p>
+      <ul style="margin:.4rem 0; padding-left:1.2rem; font-size:.85rem; color:var(--gray-700); line-height:1.8;">
+        <li>웹사이트의 본래 목적에 부합하는 작업이어야 합니다. (예: 쇼핑 사이트 → 상품 검색·구매·비교)</li>
+        <li>단순히 데이터를 긁어오는 작업은 실용적이지 않습니다.</li>
+        <li>누군가 실제로 할 작업인지 확인하세요. (예: 물건 사기, 정보 찾기, 예약하기, 가격 비교하기 등)</li>
+      </ul>
       <div class="ex-good">
-        <b>O</b> "Book the cheapest round-trip economy flight from Los Angeles to New York for 1 adult, departing March 20, 2026 and returning March 23, 2026 on united.com."
+        "Book the cheapest round-trip economy flight from Los Angeles to New York for 1 adult, departing March 20, 2026 and returning March 23, 2026 on united.com."<br>
+        <span class="ex-reason">&rarr; 사이트, 목적지, 날짜, 인원, 좌석 등급까지 명시된 실제 항공권 예약 작업</span>
+      </div>
+      <div class="ex-good">
+        "Subscribe to the channel that uploaded the most-viewed 'MacBook Neo review' video on YouTube."<br>
+        <span class="ex-reason">&rarr; YouTube에서 리뷰 영상을 찾고 채널을 구독하는 실제 사용자 행동</span>
       </div>
       <div class="ex-bad">
-        <b>X</b> "Click 10 buttons in order on YouTube."<br>
-        <span class="ex-reason">&rarr; 실제 사용자가 할 법한 목적이 없는 인위적 작업</span>
+        "Click 10 buttons in order on YouTube."<br>
+        <span class="ex-reason">&rarr; 아무도 실제로 하지 않을 인위적인 작업</span>
+      </div>
+      <div class="ex-bad">
+        "Find out who wrote the latest article on allrecipes.com."<br>
+        <span class="ex-reason">&rarr; 기사 작성자 확인은 레시피 사이트의 본래 목적과 무관한 작업</span>
       </div>
     </div>
 
     <!-- 기준 2: 구체성 -->
     <div class="criteria-item">
       <div><span class="criteria-num">2</span><span class="criteria-title">구체성</span></div>
-      <p style="margin:.5rem 0 0; font-size:.9rem;">
-        <b>추가 정보 없이도</b> 바로 수행 가능하도록, 제품명, 날짜, 수량, 위치, 가격, 평점 등 <b>구체적인 조건</b>을 명시한 Task.
+      <p style="margin:.5rem 0 0; font-size:1.1rem;">
+        <b>추가 정보 없이도</b> 바로 수행할 수 있을 만큼 <b>구체적인 조건</b>이 명시되어야 합니다.
       </p>
+      <div style="background:var(--gray-100); border-radius:var(--radius-sm); padding:.75rem 1rem; margin:.6rem 0; font-size:.85rem; line-height:1.7; color:var(--gray-700);">
+        <b style="color:var(--gray-900);">구체성을 높이는 요소들:</b><br>
+        <span style="display:inline-block; min-width:7rem;">제품명:</span> "스마트폰" → "iPhone 17 Pro"<br>
+        <span style="display:inline-block; min-width:7rem;">날짜/기간:</span> "다음 달" → "March 20–23, 2026"<br>
+        <span style="display:inline-block; min-width:7rem;">수량/인원:</span> "몇 명" → "2 adults, 1 child"<br>
+        <span style="display:inline-block; min-width:7rem;">위치:</span> "해외" → "Tokyo, Japan"<br>
+        <span style="display:inline-block; min-width:7rem;">조건/필터:</span> "저렴한" → "under $50" 또는 "with free shipping"
+      </div>
       <div class="ex-good">
-        <b>O</b> "On apple.com, compare the price and storage options of the iPhone 17 Pro and check the trade-in value for an iPhone 15."
+        "On apple.com, compare the price and storage options of the iPhone 17 Pro and check the trade-in value for an iPhone 15."<br>
+        <span class="ex-reason">&rarr; 사이트, 제품명, 비교 항목이 모두 명시되어 바로 수행 가능</span>
+      </div>
+      <div class="ex-good">
+        "Book the highest-rated hotel under $200 per night in Paris for 2 adults from June 10 to 14, 2026 on booking.com."<br>
+        <span class="ex-reason">&rarr; 사이트, 가격 조건, 평점, 도시, 인원, 날짜가 모두 명시됨</span>
       </div>
       <div class="ex-bad">
-        <b>X</b> "Purchase a memory storage device."<br>
-        <span class="ex-reason">&rarr; 어떤 사이트? 어떤 제품? 날짜/수량 등 조건 누락</span>
+        "Purchase a memory storage device."<br>
+        <span class="ex-reason">&rarr; 사이트, 제품명, 날짜, 수량 등 수행에 필요한 조건이 누락됨</span>
+      </div>
+      <div class="ex-bad">
+        "List hotels in Japan available for booking in July on Booking.com."<br>
+        <span class="ex-reason">&rarr; 도시, 정확한 날짜, 인원, 가격 조건 등 수행에 필요한 핵심 정보가 부족함</span>
       </div>
     </div>
 
     <!-- 기준 3: 객관성 -->
     <div class="criteria-item">
       <div><span class="criteria-num">3</span><span class="criteria-title">객관성</span></div>
-      <p style="margin:.5rem 0 0; font-size:.9rem;">
-        완료 여부를 <b>누가 판단하더라도 동일한 결론</b>을 내릴 수 있는 Task.<br>
-        <span style="color:var(--gray-500); font-size:.85rem;">"인기 있는", "최고의", "추천할 만한" 같은 주관적 표현 대신 객관적 기준을 사용합니다.</span>
+      <p style="margin:.5rem 0 0; font-size:1.1rem;">
+        Task의 <b>완료/성공 여부</b>를 누가 판단하더라도 <b>동일한 결론</b>을 내릴 수 있어야 합니다.
+      </p>
+      <p style="margin:.4rem 0 0; font-size:.85rem; color:var(--gray-700); line-height:1.6;">
+        "좋은", "인기 있는", "최고의" 같은 주관적 표현 대신 가격, 평점, 순위 등 객관적 기준을 사용하세요.
       </p>
       <div class="ex-good">
-        <b>O</b> "Compare the prices and customer ratings of the Rhino USA Folding Survival Shovel and the iunio 17-inch Folding Survival Shovel on amazon.com."
+        "Compare the prices and customer ratings of the Rhino USA Folding Survival Shovel and the iunio 17-inch Folding Survival Shovel on amazon.com."<br>
+        <span class="ex-reason">&rarr; 가격과 평점이라는 객관적 수치로 비교하므로 결과를 누구나 동일하게 판단 가능</span>
+      </div>
+      <div class="ex-good">
+        "Purchase the cheapest new Sony WH-1000XM5 headphone available on eBay."<br>
+        <span class="ex-reason">&rarr; "cheapest"라는 객관적 가격 기준으로 제품을 특정할 수 있음</span>
       </div>
       <div class="ex-bad">
-        <b>X</b> "Recommend me a good mascara."<br>
-        <span class="ex-reason">&rarr; "good"은 주관적. 사이트도 없음. 완료 판단 불가</span>
+        "Recommend me a good mascara."<br>
+        <span class="ex-reason">&rarr; "good"은 주관적 표현이며, 대상 사이트와 완료 기준이 없음</span>
+      </div>
+      <div class="ex-bad">
+        "Purchase a pair of fancy headphones for a young man on eBay."<br>
+        <span class="ex-reason">&rarr; "fancy"와 "young man"은 주관적 표현으로, 결과가 사람마다 달라짐</span>
       </div>
     </div>
 
     <!-- 기준 4: 고수준 목표 지향성 -->
     <div class="criteria-item">
       <div><span class="criteria-num">4</span><span class="criteria-title">고수준 목표 지향성</span></div>
-      <p style="margin:.5rem 0 0; font-size:.9rem;">
-        "<b>무엇을 하라</b>"는 명확히, "<b>어떻게 하라</b>"는 작성하지 않습니다.<br>
-        <span style="color:var(--gray-500); font-size:.85rem;">클릭, 스크롤, 입력 순서 등 절차적 지시를 포함하지 않고, 최종 목표만 서술합니다.</span>
+      <p style="margin:.5rem 0 0; font-size:1.1rem;">
+        <b>최종 목표</b>만 작성하고, <b>수행 과정</b>은 작성하지 마세요.
+      </p>
+      <p style="margin:.4rem 0 0; font-size:.85rem; color:var(--gray-700); line-height:1.6;">
+        클릭, 스크롤, 입력 순서 등의 절차적 지시는 포함하지 않습니다.
       </p>
       <div class="ex-good">
-        <b>O</b> "Book a vacation rental in Nice, France for 2 guests, checking in March 20, 2026 and checking out March 23, 2026 on airbnb.com."
+        "Book a vacation rental in Nice, France for 2 guests, checking in March 20, 2026 and checking out March 23, 2026 on airbnb.com."<br>
+        <span class="ex-reason">&rarr; 예약이라는 최종 목표만 서술하고, 수행 절차는 포함하지 않음</span>
+      </div>
+      <div class="ex-good">
+        "Create a playlist called 'Keyboard Reviews' on YouTube with the top 3 results for 'best budget mechanical keyboard 2026'."<br>
+        <span class="ex-reason">&rarr; 플레이리스트 생성이라는 최종 목표와 조건만 서술</span>
       </div>
       <div class="ex-bad">
-        <b>X</b> "Select the check-in date, then select the check-out date, then click the search button, then..."<br>
-        <span class="ex-reason">&rarr; 절차 나열. 달성하려는 목표만 쓰세요</span>
+        "Select the check-in date, then select the check-out date, then click the search button, then..."<br>
+        <span class="ex-reason">&rarr; 최종 목표 없이 절차만 나열하고 있음</span>
+      </div>
+      <div class="ex-bad">
+        "Type 'Lady Gaga' into the search box, scroll through the results, and find her latest album on YouTube."<br>
+        <span class="ex-reason">&rarr; 검색, 스크롤 등 절차를 나열하고 있으며 최종 목표가 불명확함</span>
       </div>
     </div>
   </div>
@@ -380,57 +431,14 @@ h3 { letter-spacing: -.01em; }
   <!-- ── Should Not ── -->
   <div class="warn-box" style="margin-top:1.5rem;">
     <b>이런 Task는 만들지 마세요</b><br>
-    &middot; 개인정보(실제 이름, 전화번호, 주소 등) 입력이나 로그인을 요구하는 작업<br>
-    &middot; 하나의 Task에 복수 목표를 혼재하는 경우<br>
-    &middot; 웹사이트에 존재하지 않는 허구의 콘텐츠를 기반으로 한 작업<br>
-    &middot; 윤리에 위배되는 작업
-  </div>
-
-  <div class="section-divider"></div>
-
-  <!-- ── 참고 예시 ── -->
-  <h3>참고 예시</h3>
-  <p style="font-size:.9rem; color:var(--gray-500);">영감을 얻기 위한 참고용입니다. 그대로 복사하지 마세요.</p>
-
-  <div class="card" style="padding:1rem;">
-    <div><span class="url-badge">booking.com</span> <span style="color:var(--gray-500); font-size:.85rem;">Travel &amp; Tourism</span></div>
-    <ul style="margin-top:.5rem; font-size:.9rem;">
-      <li>"Book the highest-rated hotel under $200 per night in Paris for 2 adults from June 10 to 14, 2026 on booking.com."</li>
-      <li>"Reserve a pet-friendly apartment in central Rome for 1 adult, checking in April 5 and out April 8, 2026, rated 9.0 or above on booking.com."</li>
-    </ul>
-  </div>
-  <div class="card" style="padding:1rem;">
-    <div><span class="url-badge">ebay.com</span> <span style="color:var(--gray-500); font-size:.85rem;">E-commerce &amp; Shopping</span></div>
-    <ul style="margin-top:.5rem; font-size:.9rem;">
-      <li>"Purchase the cheapest new Sony WH-1000XM5 headphone available"</li>
-      <li>"Buy a Beatles 'Abbey Road' vinyl record in Near Mint condition under $50 on eBay."</li>
-    </ul>
-  </div>
-  <div class="card" style="padding:1rem;">
-    <div><span class="url-badge">espn.com</span> <span style="color:var(--gray-500); font-size:.85rem;">Sports</span></div>
-    <ul style="margin-top:.5rem; font-size:.9rem;">
-      <li>"Add the top 3 Eastern Conference teams in the 2025-26 NBA season to your favorites on ESPN."</li>
-      <li>"Set up score alerts for the Manchester United vs. Arsenal Premier League match on April 20, 2026 on ESPN."</li>
-    </ul>
-  </div>
-  <div class="card" style="padding:1rem;">
-    <div><span class="url-badge">youtube.com</span> <span style="color:var(--gray-500); font-size:.85rem;">Arts &amp; Entertainment</span></div>
-    <ul style="margin-top:.5rem; font-size:.9rem;">
-      <li>"Subscribe to the channel that uploaded the most-viewed 'MacBook Neo review' video on YouTube."</li>
-      <li>"Create a playlist called 'Keyboard Reviews' on YouTube with the top 3 results for 'best budget mechanical keyboard 2026'."</li>
-    </ul>
-  </div>
-  <div class="card" style="padding:1rem;">
-    <div><span class="url-badge">coingecko.com</span> <span style="color:var(--gray-500); font-size:.85rem;">Crypto &amp; Blockchain</span></div>
-    <ul style="margin-top:.5rem; font-size:.9rem;">
-      <li>"Add Bitcoin to your portfolio on CoinGecko with a purchase price of $60,000."</li>
-      <li>"Create a watchlist named 'DeFi Picks' on CoinGecko with the top 5 DeFi tokens by market cap that gained over 10% in the last 7 days."</li>
-    </ul>
+    &middot; 개인정보(실제 이름, 전화번호, 주소 등) 입력이나 로그인을 요구하는 작업을 만들지 않는다.<br>
+    &middot; 웹사이트와 무관하거나 해당 페이지에 존재하지 않는 허구의 콘텐츠를 기반으로 작성하지 않는다.<br>
+    &middot; 제품명만을 변경하는 등 의미적 차이가 없는 단순 변형으로 Task를 대량 생성하는 것은 지양한다.
   </div>
 
   <div class="btn-nav">
-    <button class="btn btn-secondary" onclick="goPage(1)">&larr; 이전</button>
-    <button class="btn btn-primary" onclick="goPage(3)">다음: 연습 &rarr;</button>
+    <button class="btn btn-secondary" onclick="goPage(1)">이전</button>
+    <button class="btn btn-primary" onclick="goPage(3)">다음: Task 작성 방법</button>
   </div>
 </div>
 
@@ -442,15 +450,18 @@ h3 { letter-spacing: -.01em; }
   <p>실제 작성 전에 아래 예시를 통해 절차를 익혀보세요.</p>
 
   <div class="card card-accent">
-    <b>예시 URL: <a href="https://nike.com" target="_blank" style="color:var(--primary);">nike.com</a></b>
+    <span style="font-size:.82rem; color:var(--gray-500);">Actionable Task 유형</span>
     <div style="margin-top:1rem;">
 
       <!-- Step 1 -->
       <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
         <span class="task-num-badge" style="flex-shrink:0;">1</span>
         <div style="flex:1;">
-          <b>URL 접속 및 자유 탐색</b>
-          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">웹사이트에 접속하여 어떤 기능이 있는지 자유롭게 둘러봅니다.</p>
+          <b>관심사나 경험에 해당하는 URL 선택</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">직접 사용해본 적 있거나 관심 있는 웹사이트를 선택합니다.</p>
+          <div style="background:var(--primary-light); padding:.6rem .8rem; border-radius:8px; font-size:.9rem; margin-top:.4rem;">
+            <b>예시 URL:</b> <a href="https://nike.com" target="_blank" style="color:var(--primary);">nike.com</a>
+          </div>
         </div>
       </div>
 
@@ -458,11 +469,8 @@ h3 { letter-spacing: -.01em; }
       <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
         <span class="task-num-badge" style="flex-shrink:0;">2</span>
         <div style="flex:1;">
-          <b>이 사이트에서의 목적 작성</b>
-          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 .5rem;">사용했던 경험이 있다면 경험에 기반하여, 이 사이트에서 무엇을 할 것인지 목적을 작성합니다.</p>
-          <div style="background:var(--primary-light); padding:.6rem .8rem; border-radius:8px; font-size:.9rem;">
-            <b>목적 예시:</b> "아이보리 색의 러닝화 사기"
-          </div>
+          <b>URL 접속 및 자유 탐색</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">웹사이트에 접속하여 어떤 기능이 있는지 자유롭게 둘러봅니다.</p>
         </div>
       </div>
 
@@ -470,17 +478,30 @@ h3 { letter-spacing: -.01em; }
       <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
         <span class="task-num-badge" style="flex-shrink:0;">3</span>
         <div style="flex:1;">
-          <b>해당 목적을 직접 수행</b>
-          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">실제로 웹사이트에서 해당 목적을 수행합니다. 마지막 도달한 페이지를 확인하세요.</p>
+          <b>이 사이트에서의 목표 작성</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 .5rem;">사용했던 경험이 있다면 경험에 기반하여, 이 사이트에서 무엇을 할 것인지 목표을 작성합니다.</p>
+          <div style="background:var(--primary-light); padding:.6rem .8rem; border-radius:8px; font-size:.9rem;">
+            <b>목표 예시:</b> "아이보리 색의 러닝화 사기"
+          </div>
         </div>
       </div>
 
       <!-- Step 4 -->
-      <div style="display:flex; gap:.75rem; align-items:flex-start;">
+      <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
         <span class="task-num-badge" style="flex-shrink:0;">4</span>
+        <div style="flex:1;">
+          <b>해당 목표을 직접 수행</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">실제로 웹사이트에서 해당 목표을 수행합니다. 마지막 도달한 페이지를 확인하세요.</p>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start;">
+        <span class="task-num-badge" style="flex-shrink:0;">5</span>
         <div style="flex:1;">
           <b>마지막 페이지를 보고 구체적인 Task 작성</b>
           <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 .5rem;">수행한 결과를 바탕으로, 구체적인 조건을 포함한 영어 Task를 작성합니다.</p>
+          <img src="그림1.png" alt="마지막 페이지 예시" style="width:100%; max-width:480px; border-radius:var(--radius-sm); border:1.5px solid var(--gray-200); display:block; margin-bottom:.6rem;">
           <div style="background:#ecfdf5; border:1.5px solid #86efac; padding:.6rem .8rem; border-radius:8px; font-size:.9rem; font-style:italic;">
             "Purchase Nike Vomero 18 women's running shoes in ivory, regular fit, size 7."
           </div>
@@ -491,27 +512,77 @@ h3 { letter-spacing: -.01em; }
   </div>
 
   <!-- 두 번째 예시 (Information search) -->
-  <div class="card" style="margin-top:1rem;">
-    <b>예시 URL: <a href="https://espn.com" target="_blank" style="color:var(--primary);">espn.com</a></b> <span style="font-size:.82rem; color:var(--gray-500);">— Information Search 유형</span>
-    <div style="margin-top:.75rem; display:grid; grid-template-columns:1fr 1fr; gap:.75rem; font-size:.88rem;">
-      <div>
-        <b>목적:</b> "경기 순위 확인"
+  <div class="card card-accent" style="margin-top:1rem;">
+    <span style="font-size:.82rem; color:var(--gray-500);">Information Search 유형</span>
+    <div style="margin-top:1rem;">
+
+      <!-- Step 1 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
+        <span class="task-num-badge" style="flex-shrink:0;">1</span>
+        <div style="flex:1;">
+          <b>관심사나 경험에 해당하는 URL 선택</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">직접 사용해본 적 있거나 관심 있는 웹사이트를 선택합니다.</p>
+          <div style="background:var(--primary-light); padding:.6rem .8rem; border-radius:8px; font-size:.9rem; margin-top:.4rem;">
+            <b>예시 URL:</b> <a href="https://espn.com" target="_blank" style="color:var(--primary);">espn.com</a>
+          </div>
+        </div>
       </div>
-      <div>
-        <b>Task:</b> <i>"Did Scottie Scheffler play in Masters Tournament this year? What was his score and position on leaderboard?"</i>
+
+      <!-- Step 2 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
+        <span class="task-num-badge" style="flex-shrink:0;">2</span>
+        <div style="flex:1;">
+          <b>URL 접속 및 자유 탐색</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">웹사이트에 접속하여 어떤 기능이 있는지 자유롭게 둘러봅니다.</p>
+        </div>
       </div>
+
+      <!-- Step 3 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
+        <span class="task-num-badge" style="flex-shrink:0;">3</span>
+        <div style="flex:1;">
+          <b>이 사이트에서의 목표 작성</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 .5rem;">사용했던 경험이 있다면 경험에 기반하여, 이 사이트에서 무엇을 할 것인지 목표을 작성합니다.</p>
+          <div style="background:var(--primary-light); padding:.6rem .8rem; border-radius:8px; font-size:.9rem;">
+            <b>목표 예시:</b> "경기 순위 확인"
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1.25rem;">
+        <span class="task-num-badge" style="flex-shrink:0;">4</span>
+        <div style="flex:1;">
+          <b>해당 목표을 직접 수행</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 0;">실제로 웹사이트에서 해당 목표을 수행합니다. 마지막 도달한 페이지를 확인하세요.</p>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div style="display:flex; gap:.75rem; align-items:flex-start;">
+        <span class="task-num-badge" style="flex-shrink:0;">5</span>
+        <div style="flex:1;">
+          <b>마지막 페이지를 보고 구체적인 Task 작성</b>
+          <p style="font-size:.88rem; color:var(--gray-500); margin:.25rem 0 .5rem;">수행한 결과를 바탕으로, 구체적인 조건을 포함한 영어 Task를 작성합니다.</p>
+          <img src="그림2.png" alt="마지막 페이지 예시" style="width:100%; max-width:480px; border-radius:var(--radius-sm); border:1.5px solid var(--gray-200); display:block; margin-bottom:.6rem;">
+          <div style="background:#ecfdf5; border:1.5px solid #86efac; padding:.6rem .8rem; border-radius:8px; font-size:.9rem; font-style:italic;">
+            "Did Scottie Scheffler play in Masters Tournament this year? What was his score and position on leaderboard?"
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <div class="tip-box" style="margin-top:1.25rem;">
     <b>핵심 포인트</b><br>
-    &middot; 목적은 한글로 간단히, Task는 <b>영어로 구체적</b>으로 작성합니다.<br>
+    &middot; 목표은 <b>간단히</b>, Task는 <b>구체적</b>으로 작성합니다.<br>
     &middot; <b>직접 수행한 뒤</b> 마지막 페이지를 보고 Task를 작성하면 자연스럽게 구체적인 조건이 포함됩니다.
   </div>
 
   <div class="btn-nav">
-    <button class="btn btn-secondary" onclick="goPage(2)">&larr; 이전</button>
-    <button class="btn btn-primary" onclick="goPage(4)">다음: Task 작성 &rarr;</button>
+    <button class="btn btn-secondary" onclick="goPage(2)">이전</button>
+    <button class="btn btn-primary" onclick="goPage(4)">다음: Task 작성</button>
   </div>
 </div>
 
@@ -521,7 +592,10 @@ h3 { letter-spacing: -.01em; }
 <div class="page" id="page4">
   <h2 style="margin-top:2rem;">Task 작성</h2>
 
-  <!-- URL 랜덤 배정 -->
+  <!-- Step 1: URL 확인 -->
+  <div style="margin-bottom:.5rem; padding-left:.5rem; border-left:3px solid var(--primary);">
+    <b style="font-size:.9rem;">Step 1.</b> <span style="font-size:.88rem;">배정된 웹사이트를 확인하세요.</span>
+  </div>
   <div class="card" style="text-align:center; padding:1.25rem;">
     <div style="font-size:.85rem; color:var(--gray-500); margin-bottom:.5rem;">배정된 웹사이트</div>
     <div style="font-size:1.6rem; font-weight:700; margin:.5rem 0;">
@@ -541,28 +615,28 @@ h3 { letter-spacing: -.01em; }
       <span style="font-size:.75rem; color:var(--danger); margin-left:.5rem; font-weight:600;">필수</span>
     </div>
 
-    <!-- Step 1: 탐색 -->
+    <!-- Step 2: 탐색 -->
     <div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--gray-200);">
-      <b style="font-size:.9rem;">Step 1.</b> <span style="font-size:.88rem;">위 URL에 접속하여 자유롭게 탐색하세요.</span>
+      <b style="font-size:.9rem;">Step 2.</b> <span style="font-size:.88rem;">위 URL에 접속하여 자유롭게 탐색하세요.</span>
     </div>
 
-    <!-- Step 2: 목적 -->
+    <!-- Step 3: 목표 -->
     <div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--primary);">
-      <b style="font-size:.9rem;">Step 2.</b> <span style="font-size:.88rem;">이 사이트에서의 <b>목적</b>을 작성하세요.</span>
+      <b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">이 사이트에서의 <b>목표</b>을 작성하세요.</span>
       <p style="font-size:.8rem; color:var(--gray-500); margin:.2rem 0 .4rem;">사용했던 경험이 있다면 경험에 기반하여 작성합니다. 한글도 가능합니다.</p>
       <input type="text" class="task-input" id="purpose1" placeholder='예: "아이보리 색의 러닝화 사기"' style="padding:.5rem .7rem;">
     </div>
 
-    <!-- Step 3: 수행 + 최종 URL -->
+    <!-- Step 4: 수행 + 최종 URL -->
     <div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--primary);">
-      <b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">해당 목적을 웹사이트에서 <b>직접 수행</b>하고, 마지막 도달한 페이지의 URL을 붙여넣으세요.</span>
+      <b style="font-size:.9rem;">Step 4.</b> <span style="font-size:.88rem;">해당 목표을 웹사이트에서 <b>직접 수행</b>하고, 마지막 도달한 페이지의 URL을 붙여넣으세요.</span>
       <p style="font-size:.8rem; color:var(--gray-500); margin:.2rem 0 .4rem;">로그인 없이 누구나 접속할 수 있고, Task에 언급된 콘텐츠가 실제로 존재하는 공개 URL이어야 합니다.</p>
       <input type="text" class="task-input" id="finalurl1" placeholder="예: https://www.nike.com/w/womens-running-shoes-37v7jz5e1x6" style="padding:.5rem .7rem;">
     </div>
 
-    <!-- Step 4: Task 작성 -->
+    <!-- Step 5: Task 작성 -->
     <div style="margin-bottom:.75rem; padding-left:.5rem; border-left:3px solid var(--primary);">
-      <b style="font-size:.9rem;">Step 4.</b> <span style="font-size:.88rem;">마지막 페이지를 보고 <b>구체적인 Task를 영어로</b> 작성하세요.</span>
+      <b style="font-size:.9rem;">Step 5.</b> <span style="font-size:.88rem;">마지막 페이지를 보고 <b>구체적인 Task를 영어로</b> 작성하세요.</span>
       <textarea class="task-input" id="task1" rows="3" placeholder='예: "Purchase Nike Vomero 18 women&#39;s running shoes in ivory, regular fit, size 7."' oninput="updateCount(1)" style="margin-top:.4rem;"></textarea>
       <div class="char-count" id="count1">0 characters</div>
     </div>
@@ -572,9 +646,9 @@ h3 { letter-spacing: -.01em; }
     <div class="checklist-item"><input type="checkbox" id="c1-1"><label for="c1-1">추가 정보 없이 바로 수행 가능할 만큼 구체적인가?</label></div>
     <div class="checklist-item"><input type="checkbox" id="c1-2"><label for="c1-2">완료와 성공 여부를 누구나 객관적으로 판단할 수 있는가?</label></div>
     <div class="checklist-item"><input type="checkbox" id="c1-3"><label for="c1-3">최종 목표 중심으로 작성되었는가? (절차적 지시인 클릭, 스크롤 등을 포함하지 않음)</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-4"><label for="c1-4">로그인이나 개인정보 입력을 요구하지 않는가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-5"><label for="c1-5">URL이 공개 접근 가능하고, Task와 관련된 페이지인가?</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c1-6"><label for="c1-6">Task에 언급된 콘텐츠가 웹사이트에 실제로 존재하는가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-4"><label for="c1-4">실제 사용자가 컴퓨터에서 수행하는 작업인가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-5"><label for="c1-5">개인정보 입력을 요구하지 않는가?</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c1-6"><label for="c1-6">URL이 접근 가능하고, Task와 관련된 페이지인가?</label></div>
   </div>
 
   <!-- 추가 Task들이 여기에 삽입됨 -->
@@ -588,7 +662,7 @@ h3 { letter-spacing: -.01em; }
   <div id="submit-error" style="display:none; color:var(--danger); font-weight:600; margin-top:1rem; text-align:center;"></div>
 
   <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2rem; flex-wrap:wrap; gap:.75rem;">
-    <button class="btn btn-secondary" onclick="goPage(3)">&larr; 이전</button>
+    <button class="btn btn-secondary" onclick="goPage(3)">이전</button>
     <div style="display:flex; gap:.75rem;">
       <button class="btn btn-success" onclick="submitAndNewUrl()">제출 &amp; 다른 웹사이트</button>
       <button class="btn btn-primary" onclick="submitAndFinish()">제출 &amp; 끝내기</button>
@@ -719,20 +793,20 @@ function addTask() {
       '<button class="btn btn-secondary" onclick="removeTask(' + n + ')" style="font-size:.75rem; padding:.25rem .7rem; color:var(--danger);">삭제</button>' +
     '</div>' +
     '<div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--gray-200);">' +
-      '<b style="font-size:.9rem;">Step 1.</b> <span style="font-size:.88rem;">위 URL에 접속하여 자유롭게 탐색하세요.</span>' +
+      '<b style="font-size:.9rem;">Step 2.</b> <span style="font-size:.88rem;">위 URL에 접속하여 자유롭게 탐색하세요.</span>' +
     '</div>' +
     '<div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--primary);">' +
-      '<b style="font-size:.9rem;">Step 2.</b> <span style="font-size:.88rem;">이 사이트에서의 <b>목적</b>을 작성하세요.</span>' +
+      '<b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">이 사이트에서의 <b>목표</b>을 작성하세요.</span>' +
       '<p style="font-size:.8rem; color:var(--gray-500); margin:.2rem 0 .4rem;">사용했던 경험이 있다면 경험에 기반하여 작성합니다. 한글도 가능합니다.</p>' +
       '<input type="text" class="task-input" id="purpose' + n + '" placeholder=\'예: "아이보리 색의 러닝화 사기"\' style="padding:.5rem .7rem;">' +
     '</div>' +
     '<div style="margin-bottom:1rem; padding-left:.5rem; border-left:3px solid var(--primary);">' +
-      '<b style="font-size:.9rem;">Step 3.</b> <span style="font-size:.88rem;">해당 목적을 웹사이트에서 <b>직접 수행</b>하고, 마지막 도달한 페이지의 URL을 붙여넣으세요.</span>' +
+      '<b style="font-size:.9rem;">Step 4.</b> <span style="font-size:.88rem;">해당 목표을 웹사이트에서 <b>직접 수행</b>하고, 마지막 도달한 페이지의 URL을 붙여넣으세요.</span>' +
       '<p style="font-size:.8rem; color:var(--gray-500); margin:.2rem 0 .4rem;">로그인 없이 누구나 접속할 수 있고, Task에 언급된 콘텐츠가 실제로 존재하는 공개 URL이어야 합니다.</p>' +
       '<input type="text" class="task-input" id="finalurl' + n + '" placeholder="예: https://www.nike.com/w/womens-running-shoes-37v7jz5e1x6" style="padding:.5rem .7rem;">' +
     '</div>' +
     '<div style="margin-bottom:.75rem; padding-left:.5rem; border-left:3px solid var(--primary);">' +
-      '<b style="font-size:.9rem;">Step 4.</b> <span style="font-size:.88rem;">마지막 페이지를 보고 <b>구체적인 Task를 영어로</b> 작성하세요.</span>' +
+      '<b style="font-size:.9rem;">Step 5.</b> <span style="font-size:.88rem;">마지막 페이지를 보고 <b>구체적인 Task를 영어로</b> 작성하세요.</span>' +
       '<textarea class="task-input" id="task' + n + '" rows="3" placeholder=\'예: "Purchase Nike Vomero 18 women&#39;s running shoes in ivory, regular fit, size 7."\' oninput="updateCount(' + n + ')" style="margin-top:.4rem;"></textarea>' +
       '<div class="char-count" id="count' + n + '">0 characters</div>' +
     '</div>' +
@@ -740,9 +814,9 @@ function addTask() {
     '<div class="checklist-item"><input type="checkbox" id="c' + n + '-1"><label for="c' + n + '-1">추가 정보 없이 바로 수행 가능할 만큼 구체적인가?</label></div>' +
     '<div class="checklist-item"><input type="checkbox" id="c' + n + '-2"><label for="c' + n + '-2">완료와 성공 여부를 누구나 객관적으로 판단할 수 있는가?</label></div>' +
     '<div class="checklist-item"><input type="checkbox" id="c' + n + '-3"><label for="c' + n + '-3">최종 목표 중심으로 작성되었는가? (절차적 지시인 클릭, 스크롤 등을 포함하지 않음)</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-4"><label for="c' + n + '-4">로그인이나 개인정보 입력을 요구하지 않는가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-5"><label for="c' + n + '-5">URL이 공개 접근 가능하고, Task와 관련된 페이지인가?</label></div>' +
-    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-6"><label for="c' + n + '-6">Task에 언급된 콘텐츠가 웹사이트에 실제로 존재하는가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-4"><label for="c' + n + '-4">실제 사용자가 컴퓨터에서 수행하는 작업인가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-5"><label for="c' + n + '-5">개인정보 입력을 요구하지 않는가?</label></div>' +
+    '<div class="checklist-item"><input type="checkbox" id="c' + n + '-6"><label for="c' + n + '-6">URL이 접근 가능하고, Task와 관련된 페이지인가?</label></div>' +
   '</div>';
   document.getElementById('task-container').insertAdjacentHTML('beforeend', html);
 }
@@ -792,17 +866,17 @@ function validateTasks() {
     var t = tasks[i];
     if (!t.purpose || t.purpose.length < 2) {
       errEl.style.display = 'block';
-      errEl.textContent = 'Task ' + t.num + '의 목적(Step 2)을 작성해주세요.';
+      errEl.textContent = 'Task ' + t.num + '의 목표(Step 3)을 작성해주세요.';
       return null;
     }
     if (!t.finalurl || t.finalurl.length < 5) {
       errEl.style.display = 'block';
-      errEl.textContent = 'Task ' + t.num + '의 최종 URL(Step 3)을 입력해주세요.';
+      errEl.textContent = 'Task ' + t.num + '의 최종 URL(Step 4)을 입력해주세요.';
       return null;
     }
     if (t.text.length < 15) {
       errEl.style.display = 'block';
-      errEl.textContent = 'Task ' + t.num + '의 Task(Step 4)가 너무 짧습니다 (최소 15자).';
+      errEl.textContent = 'Task ' + t.num + '의 Task(Step 5)가 너무 짧습니다 (최소 15자).';
       return null;
     }
     for (var c = 1; c <= CHECKLIST_COUNT; c++) {
@@ -866,7 +940,7 @@ function showFinalSummary() {
     html += '<p style="margin:0;"><b>' + (idx+1) + '. ' + s.url + '</b> <span style="color:var(--gray-500); font-size:.8rem;">(' + s.category + ')</span></p>';
     s.tasks.forEach(function(t, i) {
       html += '<div style="margin:.4rem 0 .4rem 1rem; font-size:.88rem;">';
-      html += '<span style="color:var(--gray-500);">' + (i+1) + '. 목적:</span> ' + t.purpose + '<br>';
+      html += '<span style="color:var(--gray-500);">' + (i+1) + '. 목표:</span> ' + t.purpose + '<br>';
       html += '<span style="color:var(--gray-500);">URL:</span> ' + t.final_url + '<br>';
       html += '<span style="color:var(--gray-500);">Task:</span> ' + t.task;
       html += '</div>';
